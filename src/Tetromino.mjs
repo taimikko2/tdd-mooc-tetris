@@ -14,6 +14,27 @@ export class Tetromino extends RotatingShape {
         return new Tetromino(`.....\n.....\nIIII.\n.....\n.....\n`);
     }
 
+    static get O_SHAPE() {
+        return new Tetromino(`.OO\n.OO\n...\n`);
+    }
+
+    isOsahpe() {
+        //console.log("isOsahpe() "+this.shape)
+        let s = this.shape.trim().split("\n");
+        if (s[0][0] === s[1][0] 
+            && s[0][0] === s[2][0]
+            && s[0][0] === s[2][1]
+            && s[0][0] === s[2][2]
+            
+            && s[0][1] === s[0][2]
+            && s[0][1] === s[1][1]
+            && s[0][1] === s[1][2]
+            ) {
+                return true;
+            }
+        return false;
+    }
+
     checkLeft(tetro) {
         // jos vasemmalla on tyhjä sarake ja oikealla ei (ei kokonaan tyhjä) niin siirretään kaikkia sarakkeita vasemmalle
         let s = tetro.toString().split("\n");
@@ -42,8 +63,8 @@ export class Tetromino extends RotatingShape {
         for (let ri = 0; ri < r; ri++) {
             let rivi = s[ri];
             rivi += rivi[0];
-            var tmp = rivi.split(''); 
-            tmp.splice(0, 1); 
+            var tmp = rivi.split('');
+            tmp.splice(0, 1);
             rivi = tmp.join('');
             s[ri] = rivi;
         }
@@ -87,6 +108,9 @@ export class Tetromino extends RotatingShape {
     }
 
     rotateRight() {
+        if (this.isOsahpe()) {
+            return (new Tetromino(this.shape));    
+        }
         let apu = super.rotateRight();
         if (apu.toString().length <= 12) {
             return (apu);
@@ -96,16 +120,14 @@ export class Tetromino extends RotatingShape {
     }
 
     rotateLeft() {
+        if (this.isOsahpe()) {
+            return (new Tetromino(this.shape));    
+        }
         let apu = super.rotateLeft();
         if (apu.toString().length <= 12) {
             return (apu);
         }
-        if (this.checkTop(apu)) {
-            apu = this.fixTop(apu);
-        }
-        if (this.checkLeft(apu)) {
-            apu = this.fixLeft(apu);
-        }
+        apu = this.checkAndFixTetro(apu);
         return (new Tetromino(apu.toString()));
     }
 

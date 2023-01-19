@@ -51,7 +51,7 @@ describe("The T shape", () => {
 describe("The I shape", () => {
   const shape = Tetromino.I_SHAPE;
 
-  xit("initial orientation", () => {
+  it("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
       `.....
        .....
@@ -61,7 +61,7 @@ describe("The I shape", () => {
     );
   });
 
-  xit("can be rotated right/clockwise", () => {
+  it("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `..I..
        ..I..
@@ -71,7 +71,7 @@ describe("The I shape", () => {
     );
   });
 
-  xit("can be rotated left/counter-clockwise", () => {
+  it("can be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `..I..
        ..I..
@@ -83,22 +83,15 @@ describe("The I shape", () => {
 
   function oikealle(shape) {
     let goingRight = shape;
-    let goingLeft = shape;
-    for (let i = 0; i < 10; i++) {
-      //goingLeft = goingLeft.rotateLeft();
-    }
-    //goingRight = goingRight.rotateRight().rotateRight();
     let temp = goingRight.rotateRight();
     let te2 = temp.rotateRight();
     goingRight = te2;
     return goingRight;
   }
+
   function vasemmalle(shape) {
     let goingRight = shape;
     let goingLeft = shape;
-    for (let i = 0; i < 10; i++) {
-      //goingRight = goingRight.rotateRight().rotateRight();
-    }
     goingLeft = goingLeft.rotateLeft().rotateLeft();
     return goingLeft;
   }
@@ -128,7 +121,7 @@ describe("The I shape", () => {
   });
 });
 
-/*
+
 describe("The O shape", () => {
   const shape = Tetromino.O_SHAPE;
 
@@ -140,7 +133,7 @@ describe("The O shape", () => {
     );
   });
 
-  xit("cannot be rotated right/clockwise", () => {
+  it("cannot be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `.OO
        .OO
@@ -148,7 +141,7 @@ describe("The O shape", () => {
     );
   });
 
-  xit("cannot be rotated left/counter-clockwise", () => {
+  it("cannot be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `.OO
        .OO
@@ -156,8 +149,8 @@ describe("The O shape", () => {
     );
   });
 
-  xit("has 1 distinct orientations", () => {
+  it("has 1 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(1);
   });
 });
-*/
+
