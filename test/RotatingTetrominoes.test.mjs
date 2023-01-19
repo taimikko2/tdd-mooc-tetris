@@ -48,11 +48,10 @@ describe("The T shape", () => {
 });
 
 
-/*
 describe("The I shape", () => {
   const shape = Tetromino.I_SHAPE;
 
-  it("initial orientation", () => {
+  xit("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
       `.....
        .....
@@ -82,11 +81,52 @@ describe("The I shape", () => {
     );
   });
 
-  xit("has 2 distinct orientations", () => {
+  function oikealle(shape) {
+    let goingRight = shape;
+    let goingLeft = shape;
+    for (let i = 0; i < 10; i++) {
+      //goingLeft = goingLeft.rotateLeft();
+    }
+    //goingRight = goingRight.rotateRight().rotateRight();
+    let temp = goingRight.rotateRight();
+    let te2 = temp.rotateRight();
+    goingRight = te2;
+    return goingRight;
+  }
+  function vasemmalle(shape) {
+    let goingRight = shape;
+    let goingLeft = shape;
+    for (let i = 0; i < 10; i++) {
+      //goingRight = goingRight.rotateRight().rotateRight();
+    }
+    goingLeft = goingLeft.rotateLeft().rotateLeft();
+    return goingLeft;
+  }
+  
+  it("kaksi käännöstä vasemmalle", () => {
+    expect(vasemmalle(shape).toString()).to.equalShape(
+      `.....
+       .....
+       IIII.
+       .....
+       .....`
+    );
+  });
+
+  it("kaksi käännöstä oikealle", () => {
+    expect(oikealle(shape).toString()).to.equalShape(
+      `.....
+       .....
+       IIII.
+       .....
+       .....`
+    );
+  });
+
+  it("has 2 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(2);
   });
 });
-*/
 
 /*
 describe("The O shape", () => {
