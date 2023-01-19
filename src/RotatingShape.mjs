@@ -20,8 +20,7 @@ export class RotatingShape {
             }
             s += "\n";
         }
-        // this.shape = s;
-        return s;
+        return new RotatingShape(s);
     }
 
     rotateLeft() {
@@ -35,8 +34,7 @@ export class RotatingShape {
             }
             s += "\n";
         }
-        // this.shape = s;
-        return s;
+        return new RotatingShape(s);
     }
 
     toString() {
