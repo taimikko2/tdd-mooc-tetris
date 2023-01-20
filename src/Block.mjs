@@ -15,8 +15,13 @@ export class Block {
     return (this.falling === true);
   }
 
-
   toString() {
     return this.color;
   }
+
+  toShape() {
+    // ilman lopussa olevaa rivinvaihtoa
+    return this.shape.trim();
+  }
+
 }

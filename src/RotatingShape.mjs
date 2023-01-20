@@ -1,7 +1,10 @@
-export class RotatingShape {
+import { Block } from "./Block.mjs";
+
+export class RotatingShape extends Block {
     shape;
 
     constructor(shape) {
+        super(shape); // color ?
         this.shape = this.normalize(shape);
     }
 
@@ -12,7 +15,7 @@ export class RotatingShape {
     rotateRight() {
         let s = "";
         let rows = this.shape.split("\n");
-        const rcount = rows.length - 1;
+        const rcount = rows.length -1; //
         const len = rows[0].length;
         for (let l = 0; l < len; l++) {
             for (let r = rcount - 1; r >= 0; r--) {
@@ -26,7 +29,7 @@ export class RotatingShape {
     rotateLeft() {
         let s = "";
         let rows = this.shape.split("\n");
-        const rcount = rows.length - 1;
+        const rcount = rows.length - 1; //
         const len = rows[0].length;
         for (let l = len - 1; l >= 0; l--) {
             for (let r = 0; r < rcount; r++) {
@@ -40,4 +43,10 @@ export class RotatingShape {
     toString() {
         return this.shape;
     }
+
+    toShape() {
+        // ilman lopussa olevaa rivinvaihtoa
+        return this.shape.trim();
+    }
+
 }

@@ -21,7 +21,7 @@ export class Board {
     if (this.falling) {
       throw "already falling"
     }
-    let pos = Math.floor(this.width / 2);
+    let pos = Math.floor((this.width -1) / 2);
     this.items[0][pos] = item;
     this.falling += 1;
   }
@@ -59,17 +59,18 @@ export class Board {
       //const loc_prev = prev_row.findIndex(item => item !== ".");
       let curr_block = row[loc1];
 
-      //console.log(i + " rivi\n" + this.toString());
+      //console.log(i + " rivi loc "+loc1);
 
       if (loc1 < 0) {
         this.rowTick(i);
       }
       else {
+        console.log("curr_block "+curr_block.toString()+" type "+typeof(curr_block));
         this.stopFalling(curr_block);
       }
 
     }
-    //console.log(this.toString());
+    console.log(this.toString());
   }
 
   hasFalling() {
@@ -83,6 +84,7 @@ export class Board {
         const x = this.items[i][j];
         //console.log(x);
         if (x !== ".") {
+
           res += x.toString();
         } else {
           res += this.items[i][j];

@@ -38,7 +38,7 @@ export class Tetromino extends RotatingShape {
     checkLeft(tetro) {
         // jos vasemmalla on tyhjä sarake ja oikealla ei (ei kokonaan tyhjä) niin siirretään kaikkia sarakkeita vasemmalle
         let s = tetro.toString().split("\n");
-        let r = s.length - 1;
+        let r = s.length - 1; //
 
         let empty_left = true;
         let exists_right = false;
@@ -59,7 +59,7 @@ export class Tetromino extends RotatingShape {
     fixLeft(tetro) {
         let s = tetro.toString().split("\n");
         //console.log("fixLeft: " + s)
-        let r = s.length - 1;
+        let r = s.length - 1; //
         for (let ri = 0; ri < r; ri++) {
             let rivi = s[ri];
             rivi += rivi[0];
@@ -76,7 +76,7 @@ export class Tetromino extends RotatingShape {
     checkTop(tetro) {
         // jos ylhäällä on tyhjä rivi ja alhaalla ei (ei kokonaan tyhjä) niin siirretään kaikkia osia rivi ylöspäin
         let s = tetro.toString().split("\n");
-        let r = s.length - 1;
+        let r = s.length - 1; //
         let first = s[0];
         let last = s[r - 1];
 
@@ -92,7 +92,7 @@ export class Tetromino extends RotatingShape {
         let apu = s[0];
         delete (s[0]);
         let res = s.join("\n");
-        res += apu;
+        res += apu; //
         return new Tetromino(res);
     }
 
