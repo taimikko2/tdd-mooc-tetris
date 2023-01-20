@@ -1,44 +1,77 @@
 export class Board {
   width;
   height;
-  items;
+  canvas;
   falling;
+  item;
+  item_x;
+  item_y;
+  item_w;
+  item_h;
+  // vain yksi palikka liikkuu kerrallaan -> tarvitaan vain yksi item ja loput on canvasta
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.items = new Array(height);
+    this.canvas = new Array(height);
     this.falling = 0;
     for (let i = 0; i < this.height; i++) {
-      this.items[i] = new Array(width);
+      this.canvas[i] = new Array(width);
       for (let j = 0; j < this.width; j++) {
-        this.items[i][j] = ".";
+        this.canvas[i][j] = ".";
       }
     }
   }
 
   drop(item) {
+    this.item = item;
+
     if (this.falling) {
       throw "already falling"
     }
-    let pos = Math.floor((this.width -1) / 2);
+    let pos = Math.floor((this.width - 1) / 2);
+    this.item_x = pos;  // itemin keskusta
     // figure out the size and shape of item
-    let it = item.toString().trim().split("\n");  
-    let h = it.length;
-    let w = it[0].length;
-    this.items[0][pos] = item;
+    let it = item.toString().trim().split("\n");
+    this.item_h = it.length;
+    this.item_w = it[0].length;
+    this.item_y = Math.floor((this.item_h - 1) / 2); // keskusta
+
+    let row = this.canvas[0];
+    row[pos] = item;
+    if (item.toString().length > 1) {
+      console.log("item length " + item.toString().length + "\n" + item.toString());
+      if (item.toString().length <= 12) {
+        // 3 * 3
+        // oletetaan että sivuilla on tyhjää
+        row[pos - 1] = item;
+        row[pos + 1] = item;
+        row = this.canvas[1];
+        console.log("row = this.canvas[1] [pos]: "+pos+" "+row+" "+item);
+        if (row[pos - 1] === row[pos] && row[pos] === row[pos - 1] && row[pos] === ".") {
+          console.log("seuraava rivi")
+          // seuraava rivi on tyhjä tältä kohtaa
+          row[pos - 1] = item;
+          row[pos] = item;
+          row[pos + 1] = item;
+        }
+        row = this.canvas[2];
+        if (row[pos - 1] === row[pos] && row[pos] === row[pos - 1] && row[pos] === ".") {
+          console.log("seuraava rivi")
+          // seuraava rivi on tyhjä tältä kohtaa
+          row[pos - 1] = item;
+          row[pos] = item;
+          row[pos + 1] = item;
+        }
+
+        console.log("row+1 [pos]: "+pos+" "+row+" "+item);
+      }
+    }
     this.falling += 1;
   }
 
-  emptyRow(rivi) {
-    this.items[rivi] = new Array(this.width);
-    for (let x in this.items[rivi]) {
-      x = ".";
-    }
-  }
-
   rowTick(rivi) {
-    this.items[rivi] = this.items[rivi - 1];
+    this.canvas[rivi] = this.canvas[rivi - 1];
     this.emptyRow(rivi - 1);
     //console.log("rowTick(" + rivi + "):\n" + this.toString());
   }
@@ -46,20 +79,48 @@ export class Board {
   emptyRow(rivi) {
     let a = new Array(this.width);
     a.fill(".");
-    this.items[rivi] = a;
+    this.canvas[rivi] = a;
+  }
+  /*emptyRow(rivi) {
+    this.canvas[rivi] = new Array(this.width);
+    for (let x in this.canvas[rivi]) {
+      x = ".";
+    }
+  }*/
+
+  addBlockToCanvas() {
+    // this.item piirretään canvakselle
+    // 1*1 :
+    console.log("this.item type "+this.item.type+" "+this.item.toString());
+    if (this.item.type !== undefined) {
+      this.canvas[this.item_x][this.item_y] = this.item.type;
+    } else {
+      this.canvas[this.item_x][this.item_y] = this.item.shape[0];  // block:illa ei ole tyyppiä
+    }
   }
 
+
   stopFalling(block) {
+    console.log("stopFalling "+this.falling+" block "+block.toString()+" item "+this.item.toString())
+    // if (this.item.isFalling()) {
     if (block.isFalling()) {
       block.stopFalling();
+      this.item.stopFalling();
       this.falling -= 1;
+      // this.addBlockToCanvas();
     }
+  }
+
+  isSpaceForItem(i) {
+
+    return true;
   }
 
   tick() {
     for (let i = this.height - 1; i > 0; i--) {
-      let row = this.items[i];
-      const loc1 = row.findIndex(item => item !== ".");
+      // etsii nyt alhaalta ylöspäin
+      let row = this.canvas[i];
+      const loc1 = row.findIndex(item => item !== "."); // ei ole vapaata tilaa, jolle siirtää
       //const loc_prev = prev_row.findIndex(item => item !== ".");
       let curr_block = row[loc1];
 
@@ -69,7 +130,7 @@ export class Board {
         this.rowTick(i);
       }
       else {
-        //console.log("curr_block "+curr_block.toString()+" type "+typeof(curr_block));
+        console.log("curr_block "+curr_block.toString()+" item "+this.item.toString());
         this.stopFalling(curr_block);
       }
 
@@ -83,21 +144,24 @@ export class Board {
 
   addTetroToBoard(board, tetro) {
     if (tetro.toString().trim().length == 1) {
-      return board+tetro.toString().trim();
+      return board + tetro.toString().trim();
     }
-    return board +"?";
+    //console.log("type "+tetro.type);
+    return board + tetro.type; // jos shapessa on tyhjää pistäisi jättää tyhjäksi
   }
 
   toString() {
+    // TODO: kopioi canvas ja lisää siihen this.item:in shape
     let res = "";
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        const x = this.items[i][j];
+        const x = this.canvas[i][j];
         //console.log(x);
-        if (x !== ".") {
+        if (typeof(x) === "object") {
+          //console.log("tyyppi "+typeof(x));
           res = this.addTetroToBoard(res, x); // x.toString().trim()
         } else {
-          res += this.items[i][j];
+          res += this.canvas[i][j];
         }
       }
       res += "\n";
