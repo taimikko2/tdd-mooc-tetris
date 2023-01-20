@@ -22,6 +22,10 @@ export class Board {
       throw "already falling"
     }
     let pos = Math.floor((this.width -1) / 2);
+    // figure out the size and shape of item
+    let it = item.toString().trim().split("\n");  
+    let h = it.length;
+    let w = it[0].length;
     this.items[0][pos] = item;
     this.falling += 1;
   }
@@ -65,16 +69,23 @@ export class Board {
         this.rowTick(i);
       }
       else {
-        console.log("curr_block "+curr_block.toString()+" type "+typeof(curr_block));
+        //console.log("curr_block "+curr_block.toString()+" type "+typeof(curr_block));
         this.stopFalling(curr_block);
       }
 
     }
-    console.log(this.toString());
+    //console.log(this.toString());
   }
 
   hasFalling() {
     return (this.falling > 0);
+  }
+
+  addTetroToBoard(board, tetro) {
+    if (tetro.toString().trim().length == 1) {
+      return board+tetro.toString().trim();
+    }
+    return board +"?";
   }
 
   toString() {
@@ -84,8 +95,7 @@ export class Board {
         const x = this.items[i][j];
         //console.log(x);
         if (x !== ".") {
-
-          res += x.toString().trim();
+          res = this.addTetroToBoard(res, x); // x.toString().trim()
         } else {
           res += this.items[i][j];
         }
