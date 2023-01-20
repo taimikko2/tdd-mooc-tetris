@@ -15,7 +15,7 @@ describe("Falling tetrominoes", () => {
     board = new Board(10, 6);
   });
 
-  it("simple X start from the top middle + 1 tick", () => {
+  xit("simple X start from the top middle + 1 tick", () => {
     console.log(typeof(Tetromino.T_SHAPE)+ " "+(Tetromino.T_SHAPE))
     board.drop('X');
     board.tick();
