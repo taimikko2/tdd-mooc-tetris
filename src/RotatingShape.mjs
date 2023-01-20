@@ -1,7 +1,6 @@
 import { Block } from "./Block.mjs";
 
 export class RotatingShape extends Block {
-    shape;
 
     constructor(shape) {
         super(shape); // color ?
