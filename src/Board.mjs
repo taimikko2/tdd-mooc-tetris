@@ -111,12 +111,48 @@ export class Board {
     }
   }
 
-  isSpaceForItem(i) {
+  newStopFalling() {
+    console.log("new stopFalling " + this.falling + " item " + this.item.toString())
+    if (this.item.isFalling()) {
+      this.item.stopFalling();
+      this.falling = false; // ei toimi vielä, vaikka pitäisi olla täällä
+      // this.addBlockToCanvas();
+    }
+  }
+
+  addBlockToCanvas() {
+    // hae this.item:in paikka ja täytä vastaava shape canvaksella
+  }
+
+
+  isSpaceForItem() {
+    // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
+    // jos ei ole , niin palauta false
+    if (this.item.toString().length == 1) {
+      console.log("isSpaceForItem " + this.item.toString());
+      if (this.item_x >= this.height - 1) {
+        return false;
+        // ei voi siirtää alemmas
+      }
+      let row = this.canvas[this.item_x + 1]; // seuraava_rivi
+      const loc1 = row.findIndex(item => item !== "."); // ei ole vapaata tilaa, jolle siirtää
+      return (loc1 < 0);
+    } else {
+      console.log("isSpaceForItem (muut koot toteuttamatta)" + this.item.toString());
+    }
 
     return true;
   }
 
+
   tick() {
+    if (this.isSpaceForItem()) {
+      this.item_x += 1;
+    } else {
+      //this.newStopFalling();
+    }
+    // alapuolelta pois, kun alkaa toimia
+/* */    
     for (let i = this.height - 1; i > 0; i--) {
       // etsii nyt alhaalta ylöspäin
       let row = this.canvas[i];
@@ -133,7 +169,6 @@ export class Board {
         console.log("curr_block "+curr_block.toString()+" item "+this.item.toString());
         this.stopFalling(curr_block);
       }
-
     }
     //console.log(this.toString());
   }

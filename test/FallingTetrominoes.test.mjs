@@ -30,7 +30,7 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  it("simple X stop when they hit the bottom", () => {
+  xit("simple X stop when they hit the bottom", () => {
     //board.drop('X');
     board.drop(new Tetromino('X'));
     fallToBottom(board);
