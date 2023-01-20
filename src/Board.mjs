@@ -85,7 +85,7 @@ export class Board {
         //console.log(x);
         if (x !== ".") {
 
-          res += x.toString();
+          res += x.toString().trim();
         } else {
           res += this.items[i][j];
         }
