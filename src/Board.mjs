@@ -31,7 +31,7 @@ export class Board {
     this.falling = true;
     this.item = item;
     //this.item = new Tetromino(item.toString());
-    console.log("drop item \n"+item.toString()+" type "+item.type+" contructor "+ item.constructor.name+ " this "+this.item.constructor.name);
+    console.log("drop item \n" + item.toString() + " type " + item.type + " contructor " + item.constructor.name + " this " + this.item.constructor.name);
 
     let pos = Math.floor((this.width - 1) / 2);
     this.item_x = pos;  // itemin keskusta
@@ -57,7 +57,7 @@ export class Board {
   addBlockToCanvas(canStr) {
     // this.item piirretään canvakselle
     //console.log("canStr "+(canStr !== undefined)+"\n"+canStr)
-    if (this.item === undefined){
+    if (this.item === undefined) {
       // tyhjä canvas, ei ole dropattu vielä mitään
       return canStr; // pitääkö muuttaa takaisin stringiksi ?
     }
@@ -106,9 +106,9 @@ export class Board {
     for (let i = 0; i < can.length; i++) {
       //console.log("can["+i+"] "+can[i])
       temp = can[i].join('');
-      res += temp+"\n";
+      res += temp + "\n";
     }
-    console.log("addBlockToCanvas paluu \n"+res)
+    console.log("addBlockToCanvas paluu \n" + res)
     return res;
   }
 
@@ -116,7 +116,7 @@ export class Board {
     //console.log("new stopFalling " + this.falling + " item " + this.item.toString())
     if (this.item.isFalling()) {
       this.item.stopFalling();
-      this.falling = false; 
+      this.falling = false;
       //console.log("stopFalling "+this.item.toString()+" \n["+this.item_x+"]["+this.item_y+"]")
       this.addBlockToCanvas(); // tässä pitää lisätä pysyvälle canvakselle
       this.item_x = this.item_y = this.item_h = this.item_w = this.item = undefined; // vai null ??
@@ -126,22 +126,28 @@ export class Board {
   isSpaceForItem() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
     // jos ei ole , niin palauta false
-    console.log("isSpaceForItem "+this.item)
+    console.log("isSpaceForItem " + this.item)
+
     if (this.item.toString().trim().length == 1) {
       //console.log("isSpaceForItem " + this.item.toString()+" rivi "+this.item_y);
       if (this.item_y >= this.height - 1) {
-        //console.log("isSpaceForItem viimeinen rivi " + this.item_y + " >= " + this.height + "-1 , paluttaa false");
         return false;
-        // ei voi siirtää alemmas
       }
+      let row = this.canvas[this.item_y + 1]; // seuraava_rivi
+      return (row[this.item_x] === "."); // inko item:in kohdalla tilaa "."
+    } else {
+      console.log("isSpaceForItem (muut koot)" + this.item.toString().trim().length);
+      // tutkii nyt onko keskikohta (pystysuunnassa) vapaa, ei ota huomioon blockin muotoa
+      if (this.item_y >= this.height - 1) {
+        return false;
+      }
+      // tässä pitäisi sovittaa canvakselle ja katsoa mahtuuko
       let row = this.canvas[this.item_y + 1]; // seuraava_rivi
       const loc1 = row.findIndex(item => item !== "."); // ei ole vapaata tilaa, jolle siirtää
       if (loc1 >= 0) {
         //console.log("isSpaceForItem loc  " + (this.item_y + 1) + " " + (loc1 < 0));
       }
       return (loc1 < 0);
-    } else {
-      console.log("isSpaceForItem (muut koot toteuttamatta)" + this.item.toString());
     }
 
     return true;
@@ -192,7 +198,7 @@ export class Board {
       for (let j = 0; j < this.width; j++) {
         const x = can[i][j];
         if (typeof (x) === "object") {
-          console.log("toString: tänne ei pitäisi tulla ["+i+"]["+j+"] tyyppi "+typeof(x));
+          console.log("toString: tänne ei pitäisi tulla [" + i + "][" + j + "] tyyppi " + typeof (x));
           res += ".";
         } else {
           res += can[i][j];
