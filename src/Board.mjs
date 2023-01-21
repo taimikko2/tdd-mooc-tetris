@@ -1,3 +1,4 @@
+import { Tetromino } from "./Tetromino.mjs";
 export class Board {
   width;
   height;
@@ -28,8 +29,11 @@ export class Board {
       throw "already falling"
     }
     this.falling = true;
-
     this.item = item;
+    //this.item = new Tetromino(item.toString());
+    //console.log("drop item \n"+item.toString()+" type "+item.type+" contructor "+ item.constructor.name+ " this "+this.item.constructor.name);
+
+    //console.log("drop item \n"+item.toString()+"\n to canvas "+this.toString()); // toString() käyttää dataa, jota ei vielä ole alustettu
     let pos = Math.floor((this.width - 1) / 2);
     this.item_x = pos;  // itemin keskusta
     // figure out the size and shape of item
@@ -40,7 +44,9 @@ export class Board {
 
     // TODO: no need to add anything here. Just add item to canvas in toString()
     let row = this.canvas[0];
+    // seuraava vie objektin canvaksen rakenteeseen, joten pitää poistaa !!
     row[pos] = item;
+    //console.log("dropped item to canvas\n"+this.toString());
 
   }
 
@@ -59,6 +65,10 @@ export class Board {
   addBlockToCanvas(can) {
     // this.item piirretään canvakselle
     // let can = this.canvas.slice(); // uusi kopio (voidaan tehdä jo ennen kutsua tai vasta täällä ?)
+    if (this.item === undefined){
+      // tyhjä canvas, ei ole dropattu vielä mitään
+      return can;
+    }
     if (this.item_h === 1 && this.item_w === 1) {
       // 1*1 :
       //console.log("addBlockToCanvas: this.item type " + this.item.type + " " + this.item.toString());
@@ -75,6 +85,7 @@ export class Board {
       let ylare = this.item_y - (this.item_h - 1) / 2; // alkaa riviä ylempää
       // alkaen vasemmasta yläkulmasta, pitäsi shape saada sovitettua canvakselle, 
       // silloin, kun shapessa on jotain muuta kuin piste "."
+      console.log("type of item "+typeof(this.item));
       let block = this.item.toString().trim().split("\n");
       let row;
       console.log("addBlockToCanvas: " + block + " rivejä " + block.length + " yläreuna " + ylare);
@@ -97,8 +108,6 @@ export class Board {
     if (block.isFalling()) {
       block.stopFalling();
       this.falling = false;
-      // TEST ONLY:
-      //this.addBlockToCanvas(); // just testing
     }
   }
 
@@ -141,6 +150,7 @@ export class Board {
     } else {
       //this.newStopFalling();
     }
+    //return;
     // alapuolelta pois, kun alkaa toimia
     /* */
     for (let i = this.height - 1; i > 0; i--) {

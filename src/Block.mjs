@@ -1,10 +1,12 @@
 export class Block {
   color;
   falling;
+  shape;
 
   constructor(color) {
     this.color = color;
     this.falling = true;
+    this.shape = color;
   }
 
   stopFalling() {
@@ -16,12 +18,7 @@ export class Block {
   }
 
   toString() {
-    return this.color;
-  }
-
-  toShape() {
-    // ilman lopussa olevaa rivinvaihtoa
-    return this.shape.trim();
+    return this.shape;
   }
 
 }

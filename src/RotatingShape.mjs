@@ -43,9 +43,4 @@ export class RotatingShape extends Block {
         return this.shape;
     }
 
-    toShape() {
-        // ilman lopussa olevaa rivinvaihtoa
-        return this.shape.trim();
-    }
-
 }
