@@ -31,7 +31,7 @@ export class Board {
     this.falling = true;
     this.item = item;
     //this.item = new Tetromino(item.toString());
-    //console.log("drop item \n"+item.toString()+" type "+item.type+" contructor "+ item.constructor.name+ " this "+this.item.constructor.name);
+    console.log("drop item \n"+item.toString()+" type "+item.type+" contructor "+ item.constructor.name+ " this "+this.item.constructor.name);
 
     //console.log("drop item \n"+item.toString()+"\n to canvas "+this.toString()); // toString() käyttää dataa, jota ei vielä ole alustettu
     let pos = Math.floor((this.width - 1) / 2);
@@ -41,12 +41,6 @@ export class Board {
     this.item_h = it.length;
     this.item_w = it[0].length;
     this.item_y = Math.floor((this.item_h - 1) / 2); // keskusta
-
-    // TODO: no need to add anything here. Just add item to canvas in toString()
-    let row = this.canvas[0];
-    // seuraava vie objektin canvaksen rakenteeseen, joten pitää poistaa !!
-    row[pos] = item;
-    //console.log("dropped item to canvas\n"+this.toString());
 
   }
 
@@ -62,21 +56,23 @@ export class Board {
     this.canvas[rivi] = a;
   }
 
-  addBlockToCanvas(can) {
+  addBlockToCanvas(canStr) {
     // this.item piirretään canvakselle
     // let can = this.canvas.slice(); // uusi kopio (voidaan tehdä jo ennen kutsua tai vasta täällä ?)
     if (this.item === undefined){
       // tyhjä canvas, ei ole dropattu vielä mitään
-      return can;
+      return canStr; // pitääkö muuttaa takaisin stringiksi ?
     }
+    let can = canStr.trim().split("\n");
+    let temp;
+    for (let i = 0; i < can.length; i++) {
+      temp = can[i].split('');
+      can[i] = temp;
+    }
+    //console.log("can \n"+can+"\ncan[0]\n"+can[0]+"\ncanStr\n"+canStr)
     if (this.item_h === 1 && this.item_w === 1) {
       // 1*1 :
-      //console.log("addBlockToCanvas: this.item type " + this.item.type + " " + this.item.toString());
-      if (this.item.type !== undefined) {
-        can[this.item_x][this.item_y] = this.item.type;
-      } else {
-        can[this.item_x][this.item_y] = this.item.shape[0];  // block:illa ei ole tyyppiä
-      }
+      can[this.item_y][this.item_x] = this.item.shape.split('')[0];  // varmuuden vuoksi, jos shape onkin pidempi
     } else { // if (this.item_h === 3 && this.item_w === 3)
       // this.item_x ja this.item_y on keskipiste
       // kappaleen muodosta riippuen alle voi tarvita tilaa ? oletetaan, että mahtuu.
@@ -98,8 +94,16 @@ export class Board {
           }
         }
       }
-      return can;
     }
+    // muuta can takaisin stringiksi
+    let res = "";
+    for (let i = 0; i < can.length; i++) {
+      console.log("can["+i+"] "+can[i])
+      temp = can[i].join('');
+      res += temp+"\n";
+    }
+    console.log("paluu \n"+res)
+    return res;
   }
 
 
@@ -146,11 +150,11 @@ export class Board {
 
   tick() {
     if (this.isSpaceForItem()) {
-      //this.item_x += 1;
+      this.item_x += 1;
     } else {
-      //this.newStopFalling();
+      this.newStopFalling();
     }
-    //return;
+    return;
     // alapuolelta pois, kun alkaa toimia
     /* */
     for (let i = this.height - 1; i > 0; i--) {
@@ -192,6 +196,28 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         const x = can[i][j];
+        if (typeof (x) === "object") {
+          console.log("toString: tänne ei pitäisi tulla ["+i+"]["+j+"] tyyppi "+typeof(x));
+          res += ".";
+        } else {
+          res += can[i][j];
+        }
+      }
+      res += "\n";
+    }
+    //console.log("canvas: " + this.addBlockToCanvas(can));
+    //res = this.addBlockToCanvas("1..\n.2.\n..3\n");
+    res = this.addBlockToCanvas(res);
+    return res;
+  }
+
+  toString2() {
+    // TODO: kopioi canvas ja lisää siihen this.item:in shape
+    let res = "";
+    let can = this.canvas.slice();
+    for (let i = 0; i < this.height; i++) {
+      for (let j = 0; j < this.width; j++) {
+        const x = can[i][j];
         //console.log(x);
         if (typeof (x) === "object") {
           //console.log("tyyppi "+typeof(x));
@@ -201,10 +227,9 @@ export class Board {
           res += can[i][j];
         }
       }
-      //console.log("canvas: " + this.addBlockToCanvas(can));
-      //res = this.addBlockToCanvas(res);
       res += "\n";
     }
     return res;
   }
+
 }
