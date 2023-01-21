@@ -150,7 +150,7 @@ export class Board {
 
   tick() {
     if (this.isSpaceForItem()) {
-      this.item_x += 1;
+      this.item_y += 1;
     } else {
       this.newStopFalling();
     }
