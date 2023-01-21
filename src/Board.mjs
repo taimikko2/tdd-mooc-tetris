@@ -33,7 +33,6 @@ export class Board {
     //this.item = new Tetromino(item.toString());
     console.log("drop item \n"+item.toString()+" type "+item.type+" contructor "+ item.constructor.name+ " this "+this.item.constructor.name);
 
-    //console.log("drop item \n"+item.toString()+"\n to canvas "+this.toString()); // toString() käyttää dataa, jota ei vielä ole alustettu
     let pos = Math.floor((this.width - 1) / 2);
     this.item_x = pos;  // itemin keskusta
     // figure out the size and shape of item
@@ -41,7 +40,6 @@ export class Board {
     this.item_h = it.length;
     this.item_w = it[0].length;
     this.item_y = Math.floor((this.item_h - 1) / 2); // keskusta
-
   }
 
   rowTick(rivi) {
@@ -58,13 +56,12 @@ export class Board {
 
   addBlockToCanvas(canStr) {
     // this.item piirretään canvakselle
-    console.log("canStr "+(canStr !== undefined)+"\n"+canStr)
-    // let can = this.canvas.slice(); // uusi kopio (voidaan tehdä jo ennen kutsua tai vasta täällä ?)
+    //console.log("canStr "+(canStr !== undefined)+"\n"+canStr)
     if (this.item === undefined){
       // tyhjä canvas, ei ole dropattu vielä mitään
       return canStr; // pitääkö muuttaa takaisin stringiksi ?
     }
-    console.log("this.item is not undefined "+this.item)
+    //console.log("this.item is not undefined "+this.item)
     let can;
     if (canStr === undefined) {
       // update this.canvas permanently
@@ -79,7 +76,7 @@ export class Board {
     //console.log("can \n"+can+"\ncan[0]\n"+can[0]+"\ncanStr\n"+canStr)
     if (this.item_h === 1 && this.item_w === 1) {
       // 1*1 :
-      console.log("addBlockToCanvas: this.item type " + this.item.type + " " + this.item.toString()+" constructor "+this.item.constructor.name+" shape "+this.item.shape);
+      //console.log("addBlockToCanvas: this.item type " + this.item.type + " " + this.item.toString()+" constructor "+this.item.constructor.name+" shape "+this.item.shape);
       can[this.item_y][this.item_x] = this.item.shape.split('')[0];  // varmuuden vuoksi, jos shape onin pidempi
     } else { // if (this.item_h === 3 && this.item_w === 3)
       // this.item_x ja this.item_y on keskipiste
@@ -89,15 +86,15 @@ export class Board {
       let ylare = this.item_y - (this.item_h - 1) / 2; // alkaa riviä ylempää
       // alkaen vasemmasta yläkulmasta, pitäsi shape saada sovitettua canvakselle, 
       // silloin, kun shapessa on jotain muuta kuin piste "."
-      console.log("type of item "+typeof(this.item));
+      //console.log("type of item "+typeof(this.item));
       let block = this.item.toString().trim().split("\n");
       let row;
-      console.log("addBlockToCanvas: " + block + " rivejä " + block.length + " yläreuna " + ylare);
+      //console.log("addBlockToCanvas: " + block + " rivejä " + block.length + " yläreuna " + ylare);
       for (let r = 0; r < block.length; r++) {
         row = block[r];
         for (let i = 0; i < row.length; i++) {
           if (row[i] !== ".") {
-            console.log("addBlockToCanvas: " + (ylare + r) + " ][ " + (vasen + i) + " = row[" + i + "] " + row[i]);
+            //console.log("addBlockToCanvas: " + (ylare + r) + " ][ " + (vasen + i) + " = row[" + i + "] " + row[i]);
             can[ylare + r][vasen + i] = row[i];
           }
         }
@@ -107,29 +104,20 @@ export class Board {
     let res = "";
     let temp;
     for (let i = 0; i < can.length; i++) {
-      console.log("can["+i+"] "+can[i])
+      //console.log("can["+i+"] "+can[i])
       temp = can[i].join('');
       res += temp+"\n";
     }
-    console.log("paluu \n"+res)
+    console.log("addBlockToCanvas paluu \n"+res)
     return res;
-  }
-
-
-  oldStopFalling(block) {
-    //console.log("stopFalling block "+block.toString()+" item "+this.item.toString())
-    if (block.isFalling()) {
-      block.stopFalling();
-      this.falling = false;
-    }
   }
 
   stopFalling() {
     //console.log("new stopFalling " + this.falling + " item " + this.item.toString())
     if (this.item.isFalling()) {
       this.item.stopFalling();
-      this.falling = false; // ei toimi vielä, vaikka pitäisi olla täällä
-      console.log("stopFalling "+this.item.toString()+" \n["+this.item_x+"]["+this.item_y+"]")
+      this.falling = false; 
+      //console.log("stopFalling "+this.item.toString()+" \n["+this.item_x+"]["+this.item_y+"]")
       this.addBlockToCanvas(); // tässä pitää lisätä pysyvälle canvakselle
       this.item_x = this.item_y = this.item_h = this.item_w = this.item = undefined; // vai null ??
     }
@@ -138,7 +126,8 @@ export class Board {
   isSpaceForItem() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
     // jos ei ole , niin palauta false
-    if (this.item.toString().length == 1) {
+    console.log("isSpaceForItem "+this.item)
+    if (this.item.toString().trim().length == 1) {
       //console.log("isSpaceForItem " + this.item.toString()+" rivi "+this.item_y);
       if (this.item_y >= this.height - 1) {
         //console.log("isSpaceForItem viimeinen rivi " + this.item_y + " >= " + this.height + "-1 , paluttaa false");
@@ -160,6 +149,9 @@ export class Board {
 
 
   tick() {
+    if (this.item === undefined) {
+      return;
+    }
     if (this.isSpaceForItem()) {
       this.item_y += 1;
     } else {
@@ -190,14 +182,6 @@ export class Board {
 
   hasFalling() {
     return (this.falling === true);
-  }
-
-  addTetroToBoard(board, tetro) {
-    if (tetro.toString().trim().length == 1) {
-      return board + tetro.toString().trim();
-    }
-    //console.log("type "+tetro.type);
-    return board + tetro.type; // jos shapessa on tyhjää pistäisi jättää tyhjäksi
   }
 
   toString() {
