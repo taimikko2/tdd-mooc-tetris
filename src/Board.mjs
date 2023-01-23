@@ -170,7 +170,9 @@ export class Board {
   }
 
   moveLeft() {
-    this.item_x -= 1;
+    if (this.item_x > 0) {
+      this.item_x -= 1;
+    }
   }
 
   toString() {
