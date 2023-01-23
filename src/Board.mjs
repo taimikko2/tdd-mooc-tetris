@@ -94,6 +94,9 @@ export class Board {
   }
 
   stopFalling() {
+    if (this.item === undefined) {
+      return;
+    }
     if (this.item.isFalling()) {
       this.item.stopFalling();
       this.falling = false;
@@ -115,6 +118,9 @@ export class Board {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
     // jos ei ole , niin palauta false
     //console.log("isSpaceForItem " + this.item)
+    if (this.item === undefined) {
+      return false;
+    }
 
     if (this.item_y >= this.height - 1) {
       return false;
@@ -174,24 +180,20 @@ export class Board {
 
     for (let r = 0; r < this.item_h; r++) {
       if (ylare + r > this.height) {
-        //console.log("ylare + r > this.height -> true")
         return true; // osa blokista on jo canvaksen alapuolella, ei tarkastella tarkemmin
       }
-      // tila vain blockin leveydeltä riittää
+
       for (let j = 0; j < this.item_w; j++) {
         // jos shapessa on jotain muuta kuin "."
         // niin canvaksella tarvitaan tilaa siinä kohtaa
         if (block[r][j] !== ".") {
           if (this.canvas[ylare + r][vasen + j] !== ".") {
-            //console.log("ei ole tilaa ["+ylare+" + "+r+"]["+vasen+" + "+j+"] = "+this.canvas[ylare + r][vasen + j]+"\nblock ["+r+"]["+j+"]="+block[r][j]+"\nblock "+block[r])
-            //console.log(this.toString());
             return false;
           }
         }
       }
     }
     return true;
-
   }
 
 
@@ -225,6 +227,8 @@ export class Board {
   moveDown() {
     if (this.canMoveDown()) {
       this.item_y += 1;
+    } else {
+      this.stopFalling();
     }
   }
 
@@ -238,8 +242,6 @@ export class Board {
       }
       res += "\n";
     }
-    //console.log("canvas: " + this.addBlockToCanvas());
-    //res = this.addBlockToCanvas("1..\n.2.\n..3\n");
     res = this.addBlockToCanvas(res);
     return res;
   }

@@ -139,7 +139,19 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("cannot be moved down through other blocks (will stop falling)", () => { });
+        it("cannot be moved down through other blocks (will stop falling)", () => { 
+            board.moveDown();
+            board.moveDown();
+            board.moveDown();
+            board.drop(Tetromino.T_SHAPE);
+            board.moveDown();
+            expect(board.toString()).to.equalShape(
+                `..T..
+           .TTT.
+           ..X..`
+            );
+
+        });
     });
 
 });
