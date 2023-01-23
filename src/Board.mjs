@@ -196,6 +196,12 @@ export class Board {
     return true;
   }
 
+  rotateLeft() {
+    if (this.item.constructor === Tetromino) {
+      //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
+      this.item = this.item.rotateLeft();
+    }
+  }
 
   tick() {
     if (this.item === undefined) {
