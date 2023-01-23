@@ -289,3 +289,7 @@ export class Board {
     return res;
   }
 }
+
+/* arika = 4*4 vs. previous 1*1, 3'3  5*5
+  previous x,y was in the midlle of block, should it now be somewhere else ?
+*/
