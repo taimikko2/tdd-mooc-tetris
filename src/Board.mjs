@@ -201,11 +201,21 @@ export class Board {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateLeft();
       if (this.isSpace(this.item_x, this.item_y, temp)) {
-
         this.item = temp;
       }
     }
   }
+
+  rotateRight() {
+    if (this.item.constructor === Tetromino) {
+      //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
+      let temp = this.item.rotateRight();
+      if (this.isSpace(this.item_x, this.item_y, temp)) {
+        this.item = temp;
+      }
+    }
+  }
+
 
   tick() {
     if (this.item === undefined) {

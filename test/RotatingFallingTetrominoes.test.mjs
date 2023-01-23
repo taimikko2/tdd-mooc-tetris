@@ -62,12 +62,13 @@ describe("Rotating falling tetrominoes", () => {
         it("a falling tetromino can be rotated", () => {
             board.moveRight();
             board.moveRight();
+            board.moveRight();
             board.rotateRight();
             expect(board.toString()).to.equalShape(
-                `.....I..
-                 .....I..
-                 .....I..
-                 .....I..
+                `......I.
+                 ......I.
+                 ......I.
+                 ......I.
                  ........
                  ........
                  ........
