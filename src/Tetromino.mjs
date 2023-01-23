@@ -4,6 +4,34 @@ export class Tetromino extends RotatingShape {
   constructor(shape) {
     super(shape);
   }
+  /* ARIKA = 4*4 */
+  static get ARIKA_T() {
+    return new Tetromino(`....\nTTT.\n.T..\n....\n`);
+  }
+
+  static get ARIKA_I() {
+    return new Tetromino(`....\nIIII\n....\n....\n`);
+  }
+
+  static get ARIKA_L() {
+    return new Tetromino(`....\nLLL.\nL...\n....\n`);
+  }
+
+  static get ARIKA_J() {
+    return new Tetromino(`....\nJJJ.\n..J.\n....\n`);
+  }
+
+  static get ARIKA_S() {
+    return new Tetromino(`....\n.SS.\nSS..\n....\n`);
+  }
+
+  static get ARIKA_Z() {
+    return new Tetromino(`....\nZZ..\n.ZZ.\n....\n`);
+  }
+
+  static get ARIKA_O() {
+    return new Tetromino(`....\n.OO.\n.OO.\n....\n`);
+  }
 
   static get T_SHAPE() {
     return new Tetromino(`.T.\nTTT\n...\n`);
