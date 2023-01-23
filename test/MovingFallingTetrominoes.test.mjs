@@ -7,18 +7,16 @@ describe("Moving falling tetrominoes", () => {
     describe("a falling tetromino can be moved left", () => {
         let board;
         beforeEach(() => {
-            board = new Board(5, 5);
+            board = new Board(5, 4);
+            board.drop(new Tetromino("X"));
+            board.tick();
         });
 
-        it("X + one tick", () => {
-            board.drop(new Tetromino("X"));
-            //fallToBottom(board);
-            board.tick();
-
+        it("can be moved left", () => {
+            board.moveLeft();
             expect(board.toString()).to.equalShape(
                 `.....
-           ..X..
-           .....
+           .X...
            .....
            .....`
             );
