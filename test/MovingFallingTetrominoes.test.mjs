@@ -78,13 +78,13 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("cannot be moved right beyond the board", () => { 
-            board.moveLeft();
-            board.moveLeft();
-            board.moveLeft();
+        it("cannot be moved right beyond the board", () => { 
+            board.moveRight();
+            board.moveRight();
+            board.moveRight();
             expect(board.toString()).to.equalShape(
                 `.....
-           X....
+           ....X
            .....`
             );
         });
