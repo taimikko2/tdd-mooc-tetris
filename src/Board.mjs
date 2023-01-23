@@ -129,7 +129,7 @@ export class Board {
       let row = this.canvas[this.item_y + 1]; // seuraava_rivi
       return row[this.item_x] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x, this.item_y + 1)) {
+      if (this.isSpace(this.item_x, this.item_y + 1, this.item)) {
         return true;
       }
     }
@@ -145,7 +145,7 @@ export class Board {
       let row = this.canvas[this.item_y]; // samalla rivillä
       return row[this.item_x - 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x - 1, this.item_y)) {
+      if (this.isSpace(this.item_x - 1, this.item_y, this.item)) {
         return true;
       }
     }
@@ -161,19 +161,19 @@ export class Board {
       let row = this.canvas[this.item_y]; // samalla rivillä
       return row[this.item_x + 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x + 1, this.item_y)) {
+      if (this.isSpace(this.item_x + 1, this.item_y, this.item)) {
         return true;
       }
     }
     return false;
   }
 
-  isSpace(x, y) {
+  isSpace(x, y, tetro) {
     let vasen = x - (this.item_w - 1) / 2; // pykälä vasemmalle
     let ylare = y - (this.item_h - 1) / 2; // alkaa riviä ylempää
     // leveys = this.item_w
     // korkeus = this.item_h
-    let block = this.item.toString().trim().split("\n");
+    let block = tetro.toString().trim().split("\n");
     for (let i = 0; i < block.length; i++) {
       block[i] = block[i].split("");
     }
@@ -199,7 +199,11 @@ export class Board {
   rotateLeft() {
     if (this.item.constructor === Tetromino) {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
-      this.item = this.item.rotateLeft();
+      let temp = this.item.rotateLeft();
+      if (this.isSpace(this.item_x, this.item_y, temp)) {
+
+        this.item = temp;
+      }
     }
   }
 

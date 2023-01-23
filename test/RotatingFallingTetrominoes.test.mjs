@@ -12,30 +12,59 @@ describe("Rotating falling tetrominoes", () => {
         //board.tick();
     });
 
-    describe("a falling tetromino can be rotated", () => {
-        it("it can be rotated on left top corner", () => {
+    describe("left top corner", () => {
+        it("a falling tetromino can be rotated", () => {
             board.moveLeft();
+            board.rotateLeft();
             expect(board.toString()).to.equalShape(
-                `.....
-           .X...
-           .....`
+                `..I.....
+                 ..I.....
+                 ..I.....
+                 ..I.....
+                 ........
+                 ........
+                 ........
+                 ........`
             );
         });
+        it("it cannot be rotated when there is no room to rotate", () => {
+            board.moveLeft();
+            board.rotateLeft();
+            board.moveLeft();
+            board.rotateLeft();
+            expect(board.toString()).to.equalShape(
+                `.I......
+                 .I......
+                 .I......
+                 .I......
+                 ........
+                 ........
+                 ........
+                 ........`
+            );
+        })
+        /*
+        `........
+                ........
+                IIII....
+                ........
+                ........
+        */
 
-//    a falling tetromino can be rotated
-    // left top corner
-    // right top corner
-    // left bottom corner
-    // right bottom corner
+        //    a falling tetromino can be rotated
+        // left top corner
+        // right top corner
+        // left bottom corner
+        // right bottom corner
     });
 
-//    it cannot be rotated when there is no room to rotate
+    //    it cannot be rotated when there is no room to rotate
     // left top corner
     // right top corner
     // left bottom corner
     // right bottom corner
 
-//    wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
+    //    wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
     // left top corner
     // right top corner
     // left bottom corner
