@@ -222,6 +222,12 @@ export class Board {
     }
   }
 
+  moveDown() {
+    if (this.canMoveDown()) {
+      this.item_y += 1;
+    }
+  }
+
   toString() {
     // kopioi canvas ja lisää siihen this.item:in shape
     let res = "";
