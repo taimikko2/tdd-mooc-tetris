@@ -32,7 +32,7 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        it("cannot be moved left through other blocks", () => { 
+        it("1*1 cannot be moved left through other blocks", () => {
             board.moveLeft();
             board.moveLeft();
             board.tick();
@@ -44,24 +44,24 @@ describe("Moving falling tetrominoes", () => {
             board.moveLeft(),
             board.moveLeft();
             expect(board.toString()).to.equalShape(
-                `.....
+           `.....
            .....
            XY...`
             );
 
         });
     });
-/*
-    describe("a falling tetromino can be moved righ", () => {
-        it("cannot be moved right beyond the board", () => { });
-
-        it("it cannot be moved right through other blocks", () => { });
-    });
-
-    describe("a falling tetromino can be moved down", () => {
-        it("cannot be moved down beyond the board (will stop falling)", () => { });
-
-        it("cannot be moved down through other blocks (will stop falling)", () => { });
-    });
-*/
+    /*
+        describe("a falling tetromino can be moved righ", () => {
+            it("cannot be moved right beyond the board", () => { });
+    
+            it("it cannot be moved right through other blocks", () => { });
+        });
+    
+        describe("a falling tetromino can be moved down", () => {
+            it("cannot be moved down beyond the board (will stop falling)", () => { });
+    
+            it("cannot be moved down through other blocks (will stop falling)", () => { });
+        });
+    */
 });

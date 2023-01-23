@@ -154,6 +154,53 @@ export class Board {
     }
   }
 
+  canMoveLeft() {
+    // hae this.itemin paikka ja kasto onko sille tilaa siirtyä vasemmalle
+    // jos ei ole , niin palauta false
+    //console.log("isSpaceForItem " + this.item)
+
+    if (this.item.toString().trim().length == 1) {
+      if (this.item_x <= 0) {
+        return false;
+      }
+      let row = this.canvas[this.item_y]; // samalla rivillä
+      return row[this.item_x - 1] === "."; // inko item:in kohdalla tilaa "."
+    } else {
+      //console.log("isSpaceForItem (muut koot)" + this.item.toString().trim().length);
+
+      if (this.item_x <= 0) {
+        // blockin keskikohta putoaa canvaksen ulkopuolelle
+        return false;
+      }
+      // kappaleen paikka canvaksella (vasen yläkulma)
+      let vasen = this.item_x - (this.item_w - 1) / 2; // pykälä vasemmalle
+      let ylare = this.item_y - (this.item_h - 1) / 2; // alkaa riviä ylempää
+      // leveys = this.item_w
+      // korkeus = this.item_h
+      let block = this.item.toString().trim().split("\n");
+      for (let i = 0; i < block.length; i++) {
+        block[i] = block[i].split("");
+      }
+      // riittää, kun katsotaan tästä alaspäin
+      for (let i = 0; i < this.item_h; i++) {
+        if (ylare + i > this.height) {
+          return true; // osa blokista on jo canvaksen alapuolella, ei tarkastella tarkemmin
+        }
+        // tila vain blockin leveydeltä riittää
+        for (let j = 0; j < this.item_w; j++) {
+          // jos shapessa on jotain muuta kuin "."
+          // niin canvaksella tarvitaan tilaa siinä kohtaa
+          if (block[j][i] !== ".") {
+            if (this.canvas[vasen + j][ylare + i] !== ".") {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+  }
+
   tick() {
     if (this.item === undefined) {
       return;
@@ -170,7 +217,7 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.item_x > 0) {
+    if (this.item_x > 0 && this.canMoveLeft()) {
       this.item_x -= 1;
     }
   }
