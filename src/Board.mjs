@@ -202,7 +202,13 @@ export class Board {
       let temp = this.item.rotateLeft();
       if (this.isSpace(this.item_x, this.item_y, temp)) {
         this.item = temp;
-      }
+      } else if (this.isSpace(this.item_x-1, this.item_y, temp)) {
+         this.item = temp;
+         this.item_x -= 1;
+      } else if (this.isSpace(this.item_x+1, this.item_y, temp)) {
+        this.item = temp;
+        this.item_x += 1;
+      } 
     }
   }
 
