@@ -146,6 +146,22 @@ export class Board {
     return false;
   }
 
+  canMoveRight() {
+    // hae this.itemin paikka ja kasto onko sille tilaa siirtyä oikealle
+    if (this.item_x >= this.width) {
+      return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
+    }
+    if (this.item.toString().trim().length == 1) {
+      let row = this.canvas[this.item_y]; // samalla rivillä
+      return row[this.item_x + 1] === "."; // inko item:in kohdalla tilaa "."
+    } else {
+      if (this.isSpace(this.item_x + 1, this.item_y)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   isSpace(x, y) {
     let vasen = x - (this.item_w - 1) / 2; // pykälä vasemmalle
     let ylare = y - (this.item_h - 1) / 2; // alkaa riviä ylempää
@@ -197,6 +213,12 @@ export class Board {
   moveLeft() {
     if (this.canMoveLeft()) {
       this.item_x -= 1;
+    }
+  }
+
+  moveRight() {
+    if (this.canMoveRight()) {
+      this.item_x += 1;
     }
   }
 
