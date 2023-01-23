@@ -241,8 +241,27 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
-            // to be defined
+        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+            board.moveRight();
+            board.moveRight();
+            board.moveRight();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.rotateRight();
+            board.moveRight();
+            board.rotateRight();
+            expect(board.toString()).to.equalShape(
+                `........
+                 ........
+                 ........
+                 ........
+                 ........
+                 ........
+                 ....IIII
+                 ........`
+            );
         });
 
     });
