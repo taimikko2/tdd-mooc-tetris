@@ -22,7 +22,17 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("cannot be moved left beyond the board", () => { });
+        it("cannot be moved left beyond the board", () => {
+            board.moveLeft();
+            board.moveLeft();
+            board.moveLeft();
+            expect(board.toString()).to.equalShape(
+                `.....
+           X....
+           .....
+           .....`
+            );
+        });
 
         xit("cannot be moved left through other blocks", () => { });
     });
