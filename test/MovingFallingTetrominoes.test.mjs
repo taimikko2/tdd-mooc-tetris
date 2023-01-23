@@ -3,14 +3,14 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 describe("Moving falling tetrominoes", () => {
-    describe("a falling tetromino can be moved left", () => {
-        let board;
-        beforeEach(() => {
-            board = new Board(5, 3);
-            board.drop(new Tetromino("X"));
-            board.tick();
-        });
+    let board;
+    beforeEach(() => {
+        board = new Board(5, 3);
+        board.drop(new Tetromino("X"));
+        board.tick();
+    });
 
+    describe("a falling tetromino can be moved left", () => {
         it("can be moved left", () => {
             board.moveLeft();
             expect(board.toString()).to.equalShape(
@@ -66,13 +66,32 @@ describe("Moving falling tetrominoes", () => {
             );
         });
     });
-    /*
-              describe("a falling tetromino can be moved righ", () => {
-                  it("cannot be moved right beyond the board", () => { });
-          
-                  it("it cannot be moved right through other blocks", () => { });
-              });
-          
+
+    describe("a falling tetromino can be moved righ", () => {
+        
+        it("can be moved right", () => {
+            board.moveRight();
+            expect(board.toString()).to.equalShape(
+                `.....
+           ...X.
+           .....`
+            );
+        });
+
+        xit("cannot be moved right beyond the board", () => { 
+            board.moveLeft();
+            board.moveLeft();
+            board.moveLeft();
+            expect(board.toString()).to.equalShape(
+                `.....
+           X....
+           .....`
+            );
+        });
+
+        xit("it cannot be moved right through other blocks", () => { });
+    });
+    /*      
               describe("a falling tetromino can be moved down", () => {
                   it("cannot be moved down beyond the board (will stop falling)", () => { });
           
