@@ -40,7 +40,8 @@ describe("Moving falling tetrominoes", () => {
             board.drop(new Tetromino("Y"));
             board.tick();
             board.tick();
-            board.moveLeft(), board.moveLeft();
+            board.moveLeft();
+            board.moveLeft();
             expect(board.toString()).to.equalShape(
                 `.....
            .....
@@ -68,7 +69,7 @@ describe("Moving falling tetrominoes", () => {
     });
 
     describe("a falling tetromino can be moved righ", () => {
-        
+
         it("can be moved right", () => {
             board.moveRight();
             expect(board.toString()).to.equalShape(
@@ -78,7 +79,7 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        it("cannot be moved right beyond the board", () => { 
+        it("it cannot be moved right beyond the board", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -89,7 +90,41 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("it cannot be moved right through other blocks", () => { });
+        it("1*1 cannot be moved right through other blocks", () => {
+            board.moveRight();
+            board.moveRight();
+            board.tick();
+            board.tick();
+            // board.tick();
+            board.drop(new Tetromino("Y"));
+            board.tick();
+            board.tick();
+            board.moveRight();
+            board.moveRight();
+            expect(board.toString()).to.equalShape(
+                `.....
+           .....
+           ...YX`
+            );
+        });
+
+        it("T_SHAPE cannot be moved right through other blocks", () => {
+            board.moveRight();
+            board.moveRight();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.tick();
+            // board.tick();
+            board.moveRight();
+            // board.moveRight();
+            expect(board.toString()).to.equalShape(
+                `.....
+       ..T..
+       .TTTX`
+            );
+        });
     });
     /*      
               describe("a falling tetromino can be moved down", () => {
