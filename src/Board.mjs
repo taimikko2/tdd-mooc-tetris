@@ -169,6 +169,10 @@ export class Board {
     return this.falling === true;
   }
 
+  moveLeft() {
+    this.item_x -= 1;
+  }
+
   toString() {
     // kopioi canvas ja lisää siihen this.item:in shape
     let res = "";
