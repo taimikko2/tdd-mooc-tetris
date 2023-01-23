@@ -28,8 +28,6 @@ export class Board {
     }
     this.falling = true;
     this.item = item;
-    //this.item = new Tetromino(item.toString());
-    //console.log("drop item \n" + item.toString() + " type " + item.type + " contructor " + item.constructor.name + " this " + this.item.constructor.name);
 
     let pos = Math.floor((this.width - 1) / 2);
     this.item_x = pos; // itemin keskusta
@@ -42,15 +40,14 @@ export class Board {
 
   addBlockToCanvas(canStr) {
     // this.item piirretään canvakselle
-    //console.log("canStr "+(canStr !== undefined)+"\n"+canStr)
     if (this.item === undefined) {
-      // tyhjä canvas, ei ole dropattu vielä mitään
+      //console.log("tyhjä canvas, ei ole dropattu vielä mitään");
       return canStr; // pitääkö muuttaa takaisin stringiksi ?
     }
     //console.log("this.item is not undefined "+this.item)
     let can;
     if (canStr === undefined) {
-      // update this.canvas permanently
+      //console.log("update this.canvas permanently");
       can = this.canvas;
     } else {
       // temporary canvas str
@@ -75,6 +72,10 @@ export class Board {
       let row;
       for (let r = 0; r < block.length; r++) {
         row = block[r];
+        if (ylare+r >= this.height) {
+          // loppu kuvasta on canvaksen alapuolella
+          continue;
+        }
         for (let i = 0; i < row.length; i++) {
           if (row[i] !== ".") {
             can[ylare + r][vasen + i] = row[i];
@@ -117,7 +118,6 @@ export class Board {
   canMoveDown() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
     // jos ei ole , niin palauta false
-    //console.log("isSpaceForItem " + this.item)
     if (this.item === undefined) {
       return false;
     }
@@ -154,7 +154,7 @@ export class Board {
 
   canMoveRight() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä oikealle
-    if (this.item_x >= this.width) {
+    if (this.item_x >= this.width - 1) {
       return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
     }
     if (this.item.toString().trim().length == 1) {
@@ -179,7 +179,7 @@ export class Board {
     }
 
     for (let r = 0; r < this.item_h; r++) {
-      if (ylare + r > this.height) {
+      if (ylare + r >= this.height) {
         return true; // osa blokista on jo canvaksen alapuolella, ei tarkastella tarkemmin
       }
 
@@ -187,6 +187,12 @@ export class Board {
         // jos shapessa on jotain muuta kuin "."
         // niin canvaksella tarvitaan tilaa siinä kohtaa
         if (block[r][j] !== ".") {
+          if ((vasen + j) > this.width -1) {
+            return false; // osa palikasta on ulkopuolella
+          }
+          if ((vasen + j) < 0) {
+            return false; // osa palikasta on ulkopuolella
+          }
           if (this.canvas[ylare + r][vasen + j] !== ".") {
             return false;
           }

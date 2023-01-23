@@ -218,26 +218,34 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        xit("it cannot be rotated when there is no room to rotate", () => {
+        it("it cannot be rotated when there is no room to rotate", () => {
+            board.moveLeft();
+            board.moveLeft();
+            //board.rotateLeft();
+            for (let i = 0; i<10; i++) {
+                board.tick();
+            }
+            board.drop(new Tetromino(`.....\n.....\n+++++\n.....\n.....\n`));
             board.moveRight();
             board.moveRight();
             board.moveRight();
-            board.tick();
+            board.rotateRight();
+            board.moveRight();
+            board.moveRight();
             board.tick();
             board.tick();
             board.tick();
             board.rotateRight();
-            board.moveRight();
-            board.rotateRight();
+            
             expect(board.toString()).to.equalShape(
                 `........
                  ........
                  ........
-                 ........
-                 .......I
-                 .......I
-                 .......I
-                 .......I`
+                 .......+
+                 .......+
+                 .......+
+                 .......+
+                 IIII...+`
             );
         });
 
