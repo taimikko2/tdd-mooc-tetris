@@ -3,7 +3,6 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 describe("Moving falling tetrominoes", () => {
-
     describe("a falling tetromino can be moved left", () => {
         let board;
         beforeEach(() => {
@@ -41,27 +40,43 @@ describe("Moving falling tetrominoes", () => {
             board.drop(new Tetromino("Y"));
             board.tick();
             board.tick();
-            board.moveLeft(),
-            board.moveLeft();
+            board.moveLeft(), board.moveLeft();
             expect(board.toString()).to.equalShape(
-           `.....
+                `.....
            .....
            XY...`
             );
+        });
 
+        it("T_SHAPE cannot be moved left through other blocks", () => {
+            board.moveLeft();
+            board.moveLeft();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.tick();
+            //board.tick();
+            board.moveLeft();
+            //board.moveLeft();
+            expect(board.toString()).to.equalShape(
+                `.....
+       ..T..
+       XTTT.`
+            );
         });
     });
     /*
-        describe("a falling tetromino can be moved righ", () => {
-            it("cannot be moved right beyond the board", () => { });
-    
-            it("it cannot be moved right through other blocks", () => { });
-        });
-    
-        describe("a falling tetromino can be moved down", () => {
-            it("cannot be moved down beyond the board (will stop falling)", () => { });
-    
-            it("cannot be moved down through other blocks (will stop falling)", () => { });
-        });
-    */
+              describe("a falling tetromino can be moved righ", () => {
+                  it("cannot be moved right beyond the board", () => { });
+          
+                  it("it cannot be moved right through other blocks", () => { });
+              });
+          
+              describe("a falling tetromino can be moved down", () => {
+                  it("cannot be moved down beyond the board (will stop falling)", () => { });
+          
+                  it("cannot be moved down through other blocks (will stop falling)", () => { });
+              });
+          */
 });
