@@ -173,7 +173,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        xit("it cannot be rotated when there is no room to rotate", () => {
+        it("it cannot be rotated when there is no room to rotate", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
