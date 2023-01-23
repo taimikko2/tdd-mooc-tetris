@@ -27,6 +27,7 @@ describe("Rotating falling tetrominoes", () => {
                  ........`
             );
         });
+
         it("it cannot be rotated when there is no room to rotate", () => {
             board.moveLeft();
             board.rotateLeft();
@@ -43,6 +44,10 @@ describe("Rotating falling tetrominoes", () => {
                  ........`
             );
         })
+
+        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+            // to be defined
+        });
         /*
         `........
                 ........
@@ -51,22 +56,42 @@ describe("Rotating falling tetrominoes", () => {
                 ........
         */
 
-        //    a falling tetromino can be rotated
-        // left top corner
-        // right top corner
-        // left bottom corner
-        // right bottom corner
     });
 
-    //    it cannot be rotated when there is no room to rotate
-    // left top corner
-    // right top corner
-    // left bottom corner
-    // right bottom corner
+    describe("right top corner", () => {
+        it("a falling tetromino can be rotated", () => {
+            board.moveRight();
+            board.moveRight();
+            board.rotateRight();
+            expect(board.toString()).to.equalShape(
+                `.....I..
+                 .....I..
+                 .....I..
+                 .....I..
+                 ........
+                 ........
+                 ........
+                 ........`
+            );
+        });
 
+        //    it cannot be rotated when there is no room to rotate
+        //    wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
+
+    });
+
+    /*
+    describe("left bottom corner", () => {
+    //    a falling tetromino can be rotated
+    //    it cannot be rotated when there is no room to rotate
     //    wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
-    // left top corner
-    // right top corner
-    // left bottom corner
-    // right bottom corner
+    });
+
+    describe("right bottom corner", () => {
+    //    a falling tetromino can be rotated
+    //    it cannot be rotated when there is no room to rotate
+    //    wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
+
+    });
+*/
 });
