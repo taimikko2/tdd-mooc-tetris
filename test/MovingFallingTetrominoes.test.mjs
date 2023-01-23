@@ -7,7 +7,7 @@ describe("Moving falling tetrominoes", () => {
     describe("a falling tetromino can be moved left", () => {
         let board;
         beforeEach(() => {
-            board = new Board(5, 4);
+            board = new Board(5, 3);
             board.drop(new Tetromino("X"));
             board.tick();
         });
@@ -17,7 +17,6 @@ describe("Moving falling tetrominoes", () => {
             expect(board.toString()).to.equalShape(
                 `.....
            .X...
-           .....
            .....`
             );
         });
@@ -29,12 +28,28 @@ describe("Moving falling tetrominoes", () => {
             expect(board.toString()).to.equalShape(
                 `.....
            X....
-           .....
            .....`
             );
         });
 
-        xit("cannot be moved left through other blocks", () => { });
+        it("cannot be moved left through other blocks", () => { 
+            board.moveLeft();
+            board.moveLeft();
+            board.tick();
+            board.tick();
+            //board.tick();
+            board.drop(new Tetromino("Y"));
+            board.tick();
+            board.tick();
+            board.moveLeft(),
+            board.moveLeft();
+            expect(board.toString()).to.equalShape(
+                `.....
+           .....
+           XY...`
+            );
+
+        });
     });
 /*
     describe("a falling tetromino can be moved righ", () => {
