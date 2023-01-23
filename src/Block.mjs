@@ -14,11 +14,10 @@ export class Block {
   }
 
   isFalling() {
-    return (this.falling === true);
+    return this.falling === true;
   }
 
   toString() {
     return this.shape;
   }
-
 }

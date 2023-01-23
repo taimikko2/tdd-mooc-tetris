@@ -1,10 +1,9 @@
-
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 function fallToBottom(board) {
-  for (let i = 0; i < 10; i++) { 
+  for (let i = 0; i < 10; i++) {
     board.tick();
   }
 }
@@ -16,9 +15,9 @@ describe("Falling tetrominoes", () => {
   });
 
   it("simple X start from the top middle + 1 tick", () => {
-    board.drop(new Tetromino('X'));
+    board.drop(new Tetromino("X"));
     board.tick();
-  
+
     expect(board.toString()).to.equalShape(
       `..........
        ....X.....
@@ -31,7 +30,7 @@ describe("Falling tetrominoes", () => {
 
   it("simple X stop when they hit the bottom", () => {
     //board.drop('X');
-    board.drop(new Tetromino('X'));
+    board.drop(new Tetromino("X"));
     fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
@@ -87,4 +86,3 @@ describe("Falling tetrominoes", () => {
     );
   });
 });
-
