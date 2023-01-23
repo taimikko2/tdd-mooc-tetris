@@ -196,6 +196,11 @@ export class Board {
     return true;
   }
 
+  isAgainstWall(block) {
+    // onko shapen joku osa reunaa vasten
+    // pitääkö tutkia 5'5 ja 3'3 ja 1*1 erikseen ?
+  }
+
   rotateLeft() {
     if (this.item.constructor === Tetromino) {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
@@ -218,8 +223,14 @@ export class Board {
       let temp = this.item.rotateRight();
       if (this.isSpace(this.item_x, this.item_y, temp)) {
         this.item = temp;
-      }
-    }
+      } else if (this.isSpace(this.item_x-1, this.item_y, temp)) {
+        this.item = temp;
+        this.item_x -= 1;
+     } else if (this.isSpace(this.item_x+1, this.item_y, temp)) {
+       this.item = temp;
+       this.item_x += 1;
+     } 
+   }
   }
 
 

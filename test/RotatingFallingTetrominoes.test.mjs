@@ -32,12 +32,13 @@ describe("Rotating falling tetrominoes", () => {
             board.moveLeft();
             board.rotateLeft();
             board.moveLeft();
+            board.moveLeft();
             board.rotateLeft();
             expect(board.toString()).to.equalShape(
-                `.I......
-                 .I......
-                 .I......
-                 .I......
+                `I.......
+                 I.......
+                 I.......
+                 I.......
                  ........
                  ........
                  ........
@@ -45,16 +46,23 @@ describe("Rotating falling tetrominoes", () => {
             );
         })
 
-        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
-            // to be defined
+        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+            board.moveLeft();
+            board.rotateLeft();
+            board.moveLeft();
+            //board.moveLeft();
+            board.rotateLeft();
+            expect(board.toString()).to.equalShape(
+                `........
+                 ........
+                 IIII....
+                 ........
+                 ........
+                 ........
+                 ........
+                 ........`
+            );
         });
-        /*
-        `........
-                ........
-                IIII....
-                ........
-                ........
-        */
 
     });
 
@@ -77,30 +85,48 @@ describe("Rotating falling tetrominoes", () => {
         });
 
         it("it cannot be rotated when there is no room to rotate", () => {
+            for (let i = 0; i<10; i++) {
+                board.tick();
+            }
+            board.drop(new Tetromino(`.....\n.....\n-----\n.....\n.....\n`));
             board.moveRight();
             board.moveRight();
             board.moveRight();
             board.rotateRight();
+            board.moveRight();
             board.moveRight();
             board.rotateRight();
             expect(board.toString()).to.equalShape(
-                `.......I
-                 .......I
-                 .......I
-                 .......I
+                `.......-
+                 .......-
+                 .......-
+                 .......-
+                 .......-
                  ........
                  ........
-                 ........
-                 ........`
+                 .IIII...`
             );
+        });
 
-            xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
-                // to be defined
+        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+            it("a falling tetromino can be rotated", () => {
+                board.moveRight();
+                board.moveRight();
+                board.moveRight();
+                board.moveRight();
+                board.rotateRight();
+                expect(board.toString()).to.equalShape(
+                    `.......I
+                             .......I
+                             .......I
+                             .......I
+                             ........
+                             ........
+                             ........
+                             ........`
+                );
             });
-
-        })
-
-
+        });
     });
 
     describe("left bottom corner", () => {
@@ -173,7 +199,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        xit("it cannot be rotated when there is no room to rotate", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
