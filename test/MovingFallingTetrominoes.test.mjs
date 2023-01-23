@@ -126,11 +126,20 @@ describe("Moving falling tetrominoes", () => {
             );
         });
     });
-    /*      
-              describe("a falling tetromino can be moved down", () => {
-                  it("cannot be moved down beyond the board (will stop falling)", () => { });
-          
-                  it("cannot be moved down through other blocks (will stop falling)", () => { });
-              });
-          */
+
+    describe("a falling tetromino can be moved down", () => {
+        it("cannot be moved down beyond the board (will stop falling)", () => { 
+            board.moveDown();
+            board.moveDown();
+            board.moveDown();
+            expect(board.toString()).to.equalShape(
+                `.....
+           .....
+           ..X..`
+            );
+        });
+
+        xit("cannot be moved down through other blocks (will stop falling)", () => { });
+    });
+
 });
