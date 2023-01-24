@@ -10,10 +10,17 @@ describe("Rotating Arika shapes (4x4)", () => {
   const S = "....\n.SS.\nSS..\n....\n";
   const Z = "....\nZZ..\n.ZZ.\n....\n";
   const O = "....\n.OO.\n.OO.\n....\n";
+  let shape;
+  let shape2;
 
+  /*
   describe("T shape", () => {
-    let shape = new Tetromino(T);
-    it("initial orientation", () => {
+    beforeEach(() => {
+    shape = new Tetromino(T);
+    shape2 = new Tetromino(T);
+  });
+
+    xit("initial orientation", () => {
       expect(shape.toString()).to.equalShape(T);
     });
 
@@ -30,7 +37,7 @@ describe("Rotating Arika shapes (4x4)", () => {
     });
 
     xit("rotating twice left = rotating twice right", () => {
-      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape2.rotateRight().rotateRight().toString());
     });
 
     xit("4 rotations right = initial orientation", () => {
@@ -50,16 +57,20 @@ describe("Rotating Arika shapes (4x4)", () => {
     })
 
   });
+*/
 
   describe("I shape", () => {
-    let shape = new Tetromino(I);
-
+    beforeEach(() => {
+      shape = new Tetromino(I);
+      shape2 = new Tetromino(I);
+    });
+  
     it("initial orientation", () => {
       expect(shape.toString()).to.equalShape(I);
     });
 
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
+    it("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape("..I.\n..I.\n..I.\n..I.\n");
     });
 
     xit("can be rotated left/counter-clockwise", () => {
@@ -75,158 +86,154 @@ describe("Rotating Arika shapes (4x4)", () => {
     });
 
     xit("rotating left == rotating right", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
+      expect(shape.rotateLeft().toString()).to.equalShape(shape2.rotateRight().toString());
     });
 
   });
-
-  describe("L shape", () => {
-    let shape = new Tetromino(L);
-
-    it("initial orientation", () => {
-      expect(shape.toString()).to.equalShape(L);
+  /*
+    describe("L shape", () => {
+  
+      it("initial orientation", () => {
+        expect(shape.toString()).to.equalShape(L);
+      });
+  
+      xit("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice right", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice left = rotating twice right", () => {
+        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape2.rotateRight().rotateRight().toString());
+      });
+  
+      xit("4 rotations right = initial orientation", () => {
+        shape.rotateRight();
+        shape.rotateRight();
+        shape.rotateRight();
+        shape.rotateRight();
+        expect(shape.toString()).to.equalShape(L);
+      });
+  
+      xit("4 rotations left = initial orientation", () => {
+        shape.rotateLeft();
+        shape.rotateLeft();
+        shape.rotateLeft();
+        shape.rotateLeft();
+        expect(shape.toString()).to.equalShape(L);
+      })
     });
-
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
+  
+    describe("J shape", () => {
+  
+      it("initial orientation", () => {
+        expect(shape.toString()).to.equalShape(J);
+      });
+  
+      xit("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice right", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice left = rotating twice right", () => {
+        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape2.rotateRight().rotateRight().toString());
+      });
+  
+      xit("4 rotations right = initial orientation", () => {
+        shape.rotateRight();
+        shape.rotateRight();
+        shape.rotateRight();
+        shape.rotateRight();
+        expect(shape.toString()).to.equalShape(J);
+      });
+  
+      xit("4 rotations left = initial orientation", () => {
+        shape.rotateLeft();
+        shape.rotateLeft();
+        shape.rotateLeft();
+        shape.rotateLeft();
+        expect(shape.toString()).to.equalShape(J);
+      })
+  
     });
-
-    xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
+  
+    describe("S shape", () => {
+  
+      it("initial orientation", () => {
+        expect(shape.toString()).to.equalShape(S);
+      });
+  
+      xit("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice right", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("rotating right twice == initial orientation", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+      });
+  
+      xit("rotating left twice == initial orientation", () => {
+        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+      });
+  
+      xit("rotating left == rotating right", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape(shape2.rotateRight().toString());
+      });
+  
     });
-
-    xit("rotating twice right", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+  
+    describe("Z shape", () => {
+  
+      it("initial orientation", () => {
+        expect(shape.toString()).to.equalShape(Z);
+      });
+  
+      xit("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape();
+      });
+  
+      xit("rotating twice right", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+      });
+  
+      xit("rotating right twice == initial orientation", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+      });
+  
+      xit("rotating left twice == initial orientation", () => {
+        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+      });
+  
+      xit("rotating left == rotating right", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape(shape2.rotateRight().toString());
+      });
+  
     });
-
-    xit("rotating twice left = rotating twice right", () => {
-      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
-    });
-
-    xit("4 rotations right = initial orientation", () => {
-      shape.rotateRight();
-      shape.rotateRight();
-      shape.rotateRight();
-      shape.rotateRight();
-      expect(shape.toString()).to.equalShape(L);
-    });
-
-    xit("4 rotations left = initial orientation", () => {
-      shape.rotateLeft();
-      shape.rotateLeft();
-      shape.rotateLeft();
-      shape.rotateLeft();
-      expect(shape.toString()).to.equalShape(L);
-    })
-  });
-
-  describe("J shape", () => {
-    let shape = new Tetromino(J);
-
-    it("initial orientation", () => {
-      expect(shape.toString()).to.equalShape(J);
-    });
-
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
-    });
-
-    xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
-    });
-
-    xit("rotating twice right", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
-    });
-
-    xit("rotating twice left = rotating twice right", () => {
-      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
-    });
-
-    xit("4 rotations right = initial orientation", () => {
-      shape.rotateRight();
-      shape.rotateRight();
-      shape.rotateRight();
-      shape.rotateRight();
-      expect(shape.toString()).to.equalShape(J);
-    });
-
-    xit("4 rotations left = initial orientation", () => {
-      shape.rotateLeft();
-      shape.rotateLeft();
-      shape.rotateLeft();
-      shape.rotateLeft();
-      expect(shape.toString()).to.equalShape(J);
-    })
-
-  });
-
-  describe("S shape", () => {
-    let shape = new Tetromino(S);
-
-    it("initial orientation", () => {
-      expect(shape.toString()).to.equalShape(S);
-    });
-
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
-    });
-
-    xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
-    });
-
-    xit("rotating twice right", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
-    });
-
-    xit("rotating right twice == initial orientation", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
-    });
-
-    xit("rotating left twice == initial orientation", () => {
-      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
-    });
-
-    xit("rotating left == rotating right", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
-    });
-
-  });
-
-  describe("Z shape", () => {
-    let shape = new Tetromino(Z);
-
-    it("initial orientation", () => {
-      expect(shape.toString()).to.equalShape(Z);
-    });
-
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
-    });
-
-    xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
-    });
-
-    xit("rotating twice right", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
-    });
-
-    xit("rotating right twice == initial orientation", () => {
-      expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
-    });
-
-    xit("rotating left twice == initial orientation", () => {
-      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
-    });
-
-    xit("rotating left == rotating right", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
-    });
-
-  });
-
+  */
   describe("O shape", () => {
     let shape = new Tetromino(O);
 

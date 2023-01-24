@@ -7,6 +7,8 @@ export class RotatingShape extends Block {
                      '.T..\n.TT.\n.T..\n....\n',
                      '....\nTTT.\n.T..\n....\n'];  // back to initial
 
+  static I_SHAPES = [`....\nIIII\n....\n....\n`,"..I.\n..I.\n..I.\n..I.\n",`....\nIIII\n....\n....\n`];
+
   constructor(shape) {
     super(shape); // color ?
     this.shape = this.normalize(shape);
