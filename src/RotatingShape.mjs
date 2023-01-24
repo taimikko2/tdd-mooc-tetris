@@ -8,6 +8,7 @@ export class RotatingShape extends Block {
                      '....\nTTT.\n.T..\n....\n'];  // back to initial
 
   static I_SHAPES = [`....\nIIII\n....\n....\n`,"..I.\n..I.\n..I.\n..I.\n",`....\nIIII\n....\n....\n`];
+  static S_SHAPES = [`....\n.SS.\nSS..\n....\n`,"S...\nSS..\n.S..\n....\n",`....\n.SS.\nSS..\n....\n`];
 
   static O_SHAPES = [`....\n.OO.\n.OO.\n....\n`,`....\n.OO.\n.OO.\n....\n`]; // 2 samaa muotoa
 
@@ -21,31 +22,17 @@ export class RotatingShape extends Block {
     return s.replaceAll(" ", "").trim() + "\n";
   }
 
-  iShape() {
-    // indeksi tai -1 jos ei löydy
-    return RotatingShape.I_SHAPES.indexOf(this.shape);
-  }
-  
-  tShape() {
-    return RotatingShape.T_SHAPES.indexOf(this.shape);
-  }
-
-  oShape() {
-    return RotatingShape.O_SHAPES.indexOf(this.shape);
-  }
-
   findShape() {
-    if (this.oShape() >= 0) {
+    if (RotatingShape.O_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.O_SHAPES; // joku poikkeuskäsittely ?
     } 
-    if (this.iShape() >= 0) {
-      //console.log("findShape iShape");
+    if (RotatingShape.I_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.I_SHAPES;
     } 
-    /*if (this.tShape() >= 0) {
-      return RotatingShape.T_SHAPES;
+    if (RotatingShape.S_SHAPES.indexOf(this.shape) >= 0) {
+      return RotatingShape.S_SHAPES;
     } 
-    */
+    
     console.log("findShape ei löytänyt ("+this.shape+")")
     return ""; // ei löytynyt
   }

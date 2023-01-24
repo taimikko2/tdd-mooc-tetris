@@ -175,8 +175,7 @@ describe("Rotating Arika shapes (4x4)", () => {
         shape = new Tetromino(S);
         shape2 = new Tetromino(S);
       });
-      //`....\n.SS.\nSS..\n....\n`
-      //"S...\nSS..\n.S..\n....\n"
+      
       it("initial orientation", () => {
         expect(shape.toString()).to.equalShape(S);
       });
