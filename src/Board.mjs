@@ -26,7 +26,10 @@ export class Board {
     this.item = item;
     let pos = Math.floor((this.width - 1) / 2);
     // this.item.x ja this.item.y on vasen ylänurkka (arika on aina 4*4)
-    this.item.x = pos - 1;
+    if (item.toString().trim().length > 2) {
+      pos -= 1;
+    }
+    this.item.x = pos;
     this.item.y = 0; // voiko olla -1, jos ylimmällä rivillä ei ole merkkejä ?
     // W ja h on aina 4
   }
