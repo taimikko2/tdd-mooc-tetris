@@ -205,9 +205,13 @@ describe("Rotating Arika shapes (4x4)", () => {
       });
   
     });
-/*  
+ 
     describe("Z shape", () => {
-  
+      beforeEach(() => {
+        shape = new Tetromino(Z);
+        shape2 = new Tetromino(Z);
+      });
+    
       it("initial orientation", () => {
         expect(shape.toString()).to.equalShape(Z);
       });
@@ -225,11 +229,11 @@ describe("Rotating Arika shapes (4x4)", () => {
       });
   
       xit("rotating right twice == initial orientation", () => {
-        expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape(Z);
       });
   
       xit("rotating left twice == initial orientation", () => {
-        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+        expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(Z);
       });
   
       xit("rotating left == rotating right", () => {
@@ -237,7 +241,7 @@ describe("Rotating Arika shapes (4x4)", () => {
       });
   
     });
-  */
+  
   describe("O shape", () => {
     let shape = new Tetromino(O);
 
