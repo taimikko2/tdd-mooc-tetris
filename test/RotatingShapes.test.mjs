@@ -1,4 +1,4 @@
-/*import { expect } from "chai";
+import { expect } from "chai";
 import { RotatingShape } from "../src/RotatingShape.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
@@ -267,4 +267,3 @@ describe("Rotating Arika shapes (4x4)", () => {
   });
 
 });
-*/

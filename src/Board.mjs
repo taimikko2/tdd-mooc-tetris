@@ -5,10 +5,6 @@ export class Board {
   canvas;
   falling;
   item;
-  item_x;
-  item_y;
-  item_w;
-  item_h;
   // vain yksi palikka liikkuu kerrallaan -> tarvitaan vain yksi item ja loput on canvasta
 
   constructor(width, height) {
@@ -28,14 +24,7 @@ export class Board {
     }
     this.falling = true;
     this.item = item;
-
     let pos = Math.floor((this.width - 1) / 2);
-    this.item_x = pos; // itemin keskusta
-    // figure out the size and shape of item
-    let it = item.toString().trim().split("\n");
-    this.item_h = it.length;
-    this.item_w = it[0].length;
-    this.item_y = Math.floor((this.item_h - 1) / 2); // keskusta
     // this.item.x ja this.item.y on vasen ylänurkka (arika on aina 4*4)
     this.item.x = pos - 1;
     this.item.y = 0; // voiko olla -1, jos ylimmällä rivillä ei ole merkkejä ?
@@ -104,12 +93,7 @@ export class Board {
       this.item.stopFalling();
       this.falling = false;
       this.addBlockToCanvas(); // tässä pitää lisätä pysyvälle canvakselle
-      this.item_x =
-        this.item_y =
-        this.item_h =
-        this.item_w =
-        this.item =
-        undefined; // vai null ??
+      this.item = undefined; // vai null ??
     }
   }
 
@@ -169,8 +153,6 @@ export class Board {
   isSpace(x, y, tetro) {
     let vasen = x;
     let ylare = y;
-    // leveys = this.item_w
-    // korkeus = this.item_h
     let block = tetro.toString().trim().split("\n");
     for (let i = 0; i < block.length; i++) {
       block[i] = block[i].split("");
