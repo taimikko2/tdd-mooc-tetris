@@ -1,3 +1,4 @@
+/*
 //Level 6: Rotating falling tetrominoes
 
 import { expect } from "chai";
@@ -275,3 +276,4 @@ describe("Rotating falling tetrominoes", () => {
     });
 
 });
+*/

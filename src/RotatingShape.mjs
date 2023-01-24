@@ -1,6 +1,12 @@
 import { Block } from "./Block.mjs";
 
 export class RotatingShape extends Block {
+  static T_SHAPES = ['....\nTTT.\n.T..\n....\n', // initial
+                     '.T..\nTT..\n.T..\n....\n', // 1 right
+                     '....\n.T..\nTTT.\n....\n', 
+                     '.T..\n.TT.\n.T..\n....\n',
+                     '....\nTTT.\n.T..\n....\n'];  // back to initial
+
   constructor(shape) {
     super(shape); // color ?
     this.shape = this.normalize(shape);

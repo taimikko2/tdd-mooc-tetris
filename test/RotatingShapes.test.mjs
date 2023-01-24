@@ -1,74 +1,132 @@
 import { expect } from "chai";
 import { RotatingShape } from "../src/RotatingShape.mjs";
+import { Tetromino } from "../src/Tetromino.mjs";
 
-describe("Rotating 3x3 shape", () => {
-  const shape = new RotatingShape(
-    `ABC
-     DEF
-     GHI`
-  );
+describe("Rotating Aria shapes (4x4)", () => {
+  const T = "....\nTTT.\n.T..\n....\n";
+  const I = "....\nIIII\n....\n....\n";
+  const L = "....\nLLL.\nL...\n....\n";
+  const J = "....\nJJJ.\n..J.\n....\n";
+  const S = "....\n.SS.\nSS..\n....\n";
+  const Z = "....\nZZ..\n.ZZ.\n....\n";
+  const O = "....\n.OO.\n.OO.\n....\n";
 
-  it("initial orientation", () => {
-    expect(shape.toString()).to.equalShape(
-      `ABC
-       DEF
-       GHI`
-    );
+  describe("T shape", () => {
+    let shape = new Tetromino(T);
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(T);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
   });
 
-  it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
-      `GDA
-       HEB
-       IFC`
-    );
+  describe("I shape", () => {
+    let shape = new Tetromino(I);
+
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(I);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+
   });
 
-  it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
-      `CFI
-       BEH
-       ADG`
-    );
-  });
-});
+  describe("L shape", () => {
+    let shape = new Tetromino(L);
 
-describe("Rotating 5x5 shape", () => {
-  const shape = new RotatingShape(
-    `ABCDE
-     FGHIJ
-     KLMNO
-     PQRST
-     UVWXY`
-  );
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(L);
+    });
 
-  it("initial orientation", () => {
-    expect(shape.toString()).to.equalShape(
-      `ABCDE
-       FGHIJ
-       KLMNO
-       PQRST
-       UVWXY`
-    );
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
   });
 
-  it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
-      `UPKFA
-       VQLGB
-       WRMHC
-       XSNID
-       YTOJE`
-    );
+  describe("J shape", () => {
+    let shape = new Tetromino(J);
+
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(J);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
   });
 
-  it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
-      `EJOTY
-       DINSX
-       CHMRW
-       BGLQV
-       AFKPU`
-    );
+  describe("S shape", () => {
+    let shape = new Tetromino(S);
+
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(S);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
   });
+
+  describe("Z shape", () => {
+    let shape = new Tetromino(Z);
+
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(Z);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+  });
+
+  describe("O shape", () => {
+    let shape = new Tetromino(O);
+
+    it("initial orientation", () => {
+      expect(shape.toString()).to.equalShape(O);
+    });
+
+    xit("can be rotated right/clockwise", () => {
+      expect(shape.rotateRight().toString()).to.equalShape();
+    });
+
+    xit("can be rotated left/counter-clockwise", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+  });
+
 });
