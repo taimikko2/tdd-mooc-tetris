@@ -15,7 +15,6 @@ export class RotatingShape extends Block {
   constructor(shape) {
     super(shape); // color ?
     this.shape = this.normalize(shape);
-    //this.findShape();
   }
 
   normalize(s) {
@@ -50,18 +49,7 @@ export class RotatingShape extends Block {
       //console.log("rotateRight ind "+ind+" palauttaa "+sh[ind+1]);
       return new RotatingShape(sh[ind+1]);
     }
-    // loput turhaa ?
-    let s = "";
-    let rows = this.shape.split("\n");
-    const rcount = rows.length - 1; //
-    const len = rows[0].length;
-    for (let l = 0; l < len; l++) {
-      for (let r = rcount - 1; r >= 0; r--) {
-        s += rows[r][l];
-      }
-      s += "\n";
-    }
-    return new RotatingShape(s);
+    throw "No shape found";
   }
 
   rotateLeft() {
@@ -72,19 +60,7 @@ export class RotatingShape extends Block {
       //console.log("rotateLeft ind "+ind+" == id2 "+id2+" palauttaa "+sh[ind]);
       return new RotatingShape(sh[ind]);
     } 
-    // loput pois
-    console.log("rotateLeft ei löytänyt sh");
-    let s = "";
-    let rows = this.shape.split("\n");
-    const rcount = rows.length - 1; //
-    const len = rows[0].length;
-    for (let l = len - 1; l >= 0; l--) {
-      for (let r = 0; r < rcount; r++) {
-        s += rows[r][l];
-      }
-      s += "\n";
-    }
-    return new RotatingShape(s);
+    throw "No shape found";
   }
 
   toString() {

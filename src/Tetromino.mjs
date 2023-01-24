@@ -17,7 +17,6 @@ export class Tetromino extends RotatingShape {
     return new Tetromino(`....\nIIII\n....\n....\n`);
   }
 
-
   static get ARIKA_L() {
     return new Tetromino(`....\nLLL.\nL...\n....\n`);
   }
@@ -36,35 +35,6 @@ export class Tetromino extends RotatingShape {
 
   static get ARIKA_O() {
     return new Tetromino(`....\n.OO.\n.OO.\n....\n`);
-  }
-
-  static get T_SHAPE() {
-    return new Tetromino(`.T.\nTTT\n...\n`);
-  }
-
-  static get I_SHAPE() {
-    return new Tetromino(`.....\n.....\nIIII.\n.....\n.....\n`);
-  }
-
-  static get O_SHAPE() {
-    return new Tetromino(`.OO\n.OO\n...\n`);
-  }
-
-  isOsahpe() {
-    //console.log("isOsahpe() "+this.shape)
-    let s = this.shape.trim().split("\n");
-    if (
-      s[0][0] === s[1][0] &&
-      s[0][0] === s[2][0] &&
-      s[0][0] === s[2][1] &&
-      s[0][0] === s[2][2] &&
-      s[0][1] === s[0][2] &&
-      s[0][1] === s[1][1] &&
-      s[0][1] === s[1][2]
-    ) {
-      return true;
-    }
-    return false;
   }
 
   checkLeft(tetro) {
@@ -128,41 +98,11 @@ export class Tetromino extends RotatingShape {
     return new Tetromino(res);
   }
 
-  checkAndFixTetro(tetro) {
-    console.log("checkAndFixTetro EI pitäisi tarvita")
-    /*
-    if (this.checkTop(tetro)) {
-      tetro = this.fixTop(tetro);
-    }
-    if (this.checkLeft(tetro)) {
-      tetro = this.fixLeft(tetro);
-    }
-    */
-    return new Tetromino(tetro.toString());
-  }
-
   rotateRight() {
-    if (this.isOsahpe() || this.shape === Tetromino.O_SHAPE) {
-      return new Tetromino(this.shape);
-    }
-    let apu = super.rotateRight();
-    //console.log("Tetromino.rotateRight tuottaa ("+apu+")");
-    if (apu.toString().length <= 12) {
-      return apu;
-    }
-    //apu = this.checkAndFixTetro(apu);
-    return new Tetromino(apu.toString());
+    return new Tetromino(super.rotateRight().toString());
   }
 
   rotateLeft() {
-    if (this.isOsahpe()) {
-      return new Tetromino(this.shape);
-    }
-    let apu = super.rotateLeft();
-    if (apu.toString().length <= 12) {
-      return apu;
-    }
-    apu = this.checkAndFixTetro(apu);
-    return new Tetromino(apu.toString());
+    return new Tetromino(super.rotateLeft().toString());
   }
 }
