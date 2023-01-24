@@ -18,11 +18,15 @@ describe("Rotating Arika shapes (4x4)", () => {
     });
 
     xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
+      expect(shape.rotateRight().toString()).to.equalShape('.T..\nTT..\n.T..\n....\n');
     });
 
     xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
+      expect(shape.rotateLeft().toString()).to.equalShape('.T..\n.TT.\n.T..\n....\n');
+    });
+
+    xit("rotating twice right", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape('....\n.T..\nTTT.\n....\n');
     });
 
     xit("rotating twice left = rotating twice right", () => {
@@ -91,6 +95,10 @@ describe("Rotating Arika shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
+    xit("rotating twice right", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+    });
+
     xit("rotating twice left = rotating twice right", () => {
       expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
     });
@@ -125,6 +133,10 @@ describe("Rotating Arika shapes (4x4)", () => {
 
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+    xit("rotating twice right", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
     });
 
     xit("rotating twice left = rotating twice right", () => {
@@ -164,6 +176,10 @@ describe("Rotating Arika shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
+    xit("rotating twice right", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
+    });
+
     xit("rotating right twice == initial orientation", () => {
       expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
     });
@@ -191,6 +207,10 @@ describe("Rotating Arika shapes (4x4)", () => {
 
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+    xit("rotating twice right", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
     });
 
     xit("rotating right twice == initial orientation", () => {
