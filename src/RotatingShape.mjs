@@ -35,6 +35,9 @@ export class RotatingShape extends Block {
     if (RotatingShape.Z_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.Z_SHAPES;
     } 
+    if (RotatingShape.T_SHAPES.indexOf(this.shape) >= 0) {
+      return RotatingShape.T_SHAPES;
+    } 
     console.log("findShape ei löytänyt ("+this.shape+")")
     return ""; // ei löytynyt
   }
