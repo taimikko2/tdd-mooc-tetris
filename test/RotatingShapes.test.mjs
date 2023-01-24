@@ -100,8 +100,8 @@ describe("Rotating Arika shapes (4x4)", () => {
         expect(shape.toString()).to.equalShape(L);
       });
   
-      xit("can be rotated right/clockwise", () => {
-        expect(shape.rotateRight().toString()).to.equalShape();
+      it("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape(`LL..\n.L..\n.L..\n....\n`);
       });
   
       xit("can be rotated left/counter-clockwise", () => {
