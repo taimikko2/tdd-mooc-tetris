@@ -123,6 +123,9 @@ export class Board {
 
   canMoveLeft() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä vasemmalle
+    if (this.item === undefined) { 
+      return false; // nothing to move anymore
+    }
     if (this.item.x <= 0) {
       return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
     }
