@@ -9,7 +9,7 @@ export class RotatingShape extends Block {
 
   static I_SHAPES = [`....\nIIII\n....\n....\n`,"..I.\n..I.\n..I.\n..I.\n",`....\nIIII\n....\n....\n`];
   static S_SHAPES = [`....\n.SS.\nSS..\n....\n`,"S...\nSS..\n.S..\n....\n",`....\n.SS.\nSS..\n....\n`];
-
+  static Z_SHAPES = [`....\nZZ..\n.ZZ.\n....\n`,`..Z.\n.ZZ.\n.Z..\n....\n`,`....\nZZ..\n.ZZ.\n....\n`];
   static O_SHAPES = [`....\n.OO.\n.OO.\n....\n`,`....\n.OO.\n.OO.\n....\n`]; // 2 samaa muotoa
 
   constructor(shape) {
@@ -32,7 +32,9 @@ export class RotatingShape extends Block {
     if (RotatingShape.S_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.S_SHAPES;
     } 
-    
+    if (RotatingShape.Z_SHAPES.indexOf(this.shape) >= 0) {
+      return RotatingShape.Z_SHAPES;
+    } 
     console.log("findShape ei löytänyt ("+this.shape+")")
     return ""; // ei löytynyt
   }
