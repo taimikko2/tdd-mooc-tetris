@@ -84,7 +84,7 @@ describe("Moving falling tetrominoes", () => {
 
     describe("a falling tetromino can be moved righ", () => {
 
-        xit("can be moved right", () => {
+        it("can be moved right", () => {
             board.moveRight();
             expect(board.toString()).to.equalShape(
                 `.....
@@ -95,20 +95,20 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("it cannot be moved right beyond the board", () => {
+        it("it cannot be moved right beyond the board", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
             expect(board.toString()).to.equalShape(
                 `.....
-                .....
-                .....
-                ....X
-                .....`
+                 ....X
+                 .....
+                 .....
+                 .....`
             );
         });
 
-        xit("1*1 cannot be moved right through other blocks", () => {
+        it("1*1 cannot be moved right through other blocks", () => {
             board.moveRight();
             board.moveRight();
             board.tick();
@@ -131,7 +131,7 @@ describe("Moving falling tetrominoes", () => {
             );
         });
 
-        xit("T_SHAPE cannot be moved right through other blocks", () => {
+        it("T_SHAPE cannot be moved right through other blocks", () => {
             board.moveRight();
             board.moveRight();
             board.tick();
@@ -142,21 +142,20 @@ describe("Moving falling tetrominoes", () => {
             board.drop(Tetromino.T_SHAPE);
             board.tick();
             board.tick();
-            board.tick();
             board.moveRight();
-            // board.moveRight();
+            board.moveRight();
             expect(board.toString()).to.equalShape(
                 `.....
                 .....
                 .....
-                ..T..
-                .TTTX`
+                ..TTT
+                ...TX`
             );
         });
     });
 
     describe("a falling tetromino can be moved down", () => {
-        xit("cannot be moved down beyond the board (will stop falling)", () => {
+        it("cannot be moved down beyond the board (will stop falling)", () => {
             board.moveDown();
             board.moveDown();
             board.moveDown();
@@ -169,13 +168,17 @@ describe("Moving falling tetrominoes", () => {
                 .....
                 ..X..`
             );
+            expect(board.hasFalling(), "the block should stop moving").to.be.false;
         });
 
-        xit("cannot be moved down through other blocks (will stop falling)", () => {
+        it("cannot be moved down through other blocks (will stop falling)", () => {
             board.moveDown();
             board.moveDown();
             board.moveDown();
+            board.tick();
+            board.tick();
             board.drop(Tetromino.T_SHAPE);
+            board.moveDown();
             board.moveDown();
             expect(board.toString()).to.equalShape(
                 `.....
@@ -184,7 +187,7 @@ describe("Moving falling tetrominoes", () => {
                 ..T..
                 ..X..`
             );
-
+            expect(board.hasFalling(), "the block should stop moving").to.be.false;
         });
     });
 });

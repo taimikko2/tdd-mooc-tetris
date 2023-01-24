@@ -142,6 +142,9 @@ export class Board {
 
   canMoveRight() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä oikealle
+    if (this.item === undefined) { 
+      return false; // nothing to move anymore
+    }
     if (this.item.x >= this.width - 1) {
       return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
     }
