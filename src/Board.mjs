@@ -36,6 +36,10 @@ export class Board {
     this.item_h = it.length;
     this.item_w = it[0].length;
     this.item_y = Math.floor((this.item_h - 1) / 2); // keskusta
+    // this.item.x ja this.item.y on vasen ylänurkka (arika on aina 4*4)
+    this.item.x = pos - 1;
+    this.item.y = 0; // voiko olla -1, jos ylimmällä rivillä ei ole merkkejä ?
+    // W ja h on aina 4
   }
 
   addBlockToCanvas(canStr) {
@@ -57,15 +61,12 @@ export class Board {
       }
     }
 
-    if (this.item_h === 1 && this.item_w === 1) {
-      can[this.item_y][this.item_x] = this.item.shape.split("")[0]; // varmuuden vuoksi, jos shape onkin pidempi
+    if (this.item.length === 1) {
+      can[this.item.y][this.item.x] = this.item.shape.toString();
     } else {
-      // if (this.item_h === 3 && this.item_w === 3)
-      // this.item_x ja this.item_y on keskipiste
-      // kappaleen muodosta riippuen alle voi tarvita tilaa ? oletetaan, että mahtuu.
       // kappaleen paikka canvaksella (vasen yläkulma)
-      let vasen = this.item_x - (this.item_w - 1) / 2; // pykälä vasemmalle
-      let ylare = this.item_y - (this.item_h - 1) / 2; // alkaa riviä ylempää
+      let vasen = this.item.x;
+      let ylare = this.item.y;
       // alkaen vasemmasta yläkulmasta, pitäsi shape saada sovitettua canvakselle,
       // silloin, kun shapessa on jotain muuta kuin piste "."
       let block = this.item.toString().trim().split("\n");
@@ -96,6 +97,7 @@ export class Board {
 
   stopFalling() {
     if (this.item === undefined) {
+      //console.log("stopFalling undefined");
       return;
     }
     if (this.item.isFalling()) {
@@ -111,25 +113,21 @@ export class Board {
     }
   }
 
-  isSpaceForItem(x, y) {
-
-  }
-
   canMoveDown() {
-    // hae this.itemin paikka ja kasto onko sille tilaa siirtyä alaspäin
+    // hae this.itemin paikka ja katso onko sille tilaa siirtyä alaspäin
     // jos ei ole , niin palauta false
     if (this.item === undefined) {
       return false;
     }
 
-    if (this.item_y >= this.height - 1) {
+    if (this.item.y >= this.height - 1) {
       return false;
     }
     if (this.item.toString().trim().length == 1) {
-      let row = this.canvas[this.item_y + 1]; // seuraava_rivi
-      return row[this.item_x] === "."; // inko item:in kohdalla tilaa "."
+      let row = this.canvas[this.item.y + 1]; // seuraava_rivi
+      return row[this.item.x] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x, this.item_y + 1, this.item)) {
+      if (this.isSpace(this.item.x, this.item.y + 1, this.item)) {
         return true;
       }
     }
@@ -138,14 +136,14 @@ export class Board {
 
   canMoveLeft() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä vasemmalle
-    if (this.item_x <= 0) {
+    if (this.item.x <= 0) {
       return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
     }
     if (this.item.toString().trim().length == 1) {
-      let row = this.canvas[this.item_y]; // samalla rivillä
-      return row[this.item_x - 1] === "."; // inko item:in kohdalla tilaa "."
+      let row = this.canvas[this.item.y]; // samalla rivillä
+      return row[this.item.x - 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x - 1, this.item_y, this.item)) {
+      if (this.isSpace(this.item.x - 1, this.item.y, this.item)) {
         return true;
       }
     }
@@ -154,14 +152,14 @@ export class Board {
 
   canMoveRight() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä oikealle
-    if (this.item_x >= this.width - 1) {
+    if (this.item.x >= this.width - 1) {
       return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
     }
     if (this.item.toString().trim().length == 1) {
-      let row = this.canvas[this.item_y]; // samalla rivillä
-      return row[this.item_x + 1] === "."; // inko item:in kohdalla tilaa "."
+      let row = this.canvas[this.item.y]; // samalla rivillä
+      return row[this.item.x + 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
-      if (this.isSpace(this.item_x + 1, this.item_y, this.item)) {
+      if (this.isSpace(this.item.x + 1, this.item.y, this.item)) {
         return true;
       }
     }
@@ -169,21 +167,20 @@ export class Board {
   }
 
   isSpace(x, y, tetro) {
-    let vasen = x - (this.item_w - 1) / 2; // pykälä vasemmalle
-    let ylare = y - (this.item_h - 1) / 2; // alkaa riviä ylempää
+    let vasen = x;
+    let ylare = y;
     // leveys = this.item_w
     // korkeus = this.item_h
     let block = tetro.toString().trim().split("\n");
     for (let i = 0; i < block.length; i++) {
       block[i] = block[i].split("");
     }
+    let item_h = block.length; // pitäisi olla 4 arika -shapella
+    let item_w = block[0].length; // pitäisi olla 4 arika -shapella
 
-    for (let r = 0; r < this.item_h; r++) {
-      if (ylare + r >= this.height) {
-        return true; // osa blokista on jo canvaksen alapuolella, ei tarkastella tarkemmin
-      }
-
-      for (let j = 0; j < this.item_w; j++) {
+    //console.log("isSpace ylä, max "+ylare+" "+this.height+" item h ja w "+item_h+" "+item_w);
+    for (let r = 0; r < item_h; r++) {
+      for (let j = 0; j < item_w; j++) {
         // jos shapessa on jotain muuta kuin "."
         // niin canvaksella tarvitaan tilaa siinä kohtaa
         if (block[r][j] !== ".") {
@@ -192,6 +189,9 @@ export class Board {
           }
           if ((vasen + j) < 0) {
             return false; // osa palikasta on ulkopuolella
+          }
+          if (ylare + r >= this.height) {
+            return false; // on jo canvaksen alapuolella
           }
           if (this.canvas[ylare + r][vasen + j] !== ".") {
             return false;
@@ -211,14 +211,14 @@ export class Board {
     if (this.item.constructor === Tetromino) {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateLeft();
-      if (this.isSpace(this.item_x, this.item_y, temp)) {
+      if (this.isSpace(this.item.x, this.item.y, temp)) {
         this.item = temp;
-      } else if (this.isSpace(this.item_x-1, this.item_y, temp)) {
+      } else if (this.isSpace(this.item.x-1, this.item.y, temp)) {
          this.item = temp;
-         this.item_x -= 1;
-      } else if (this.isSpace(this.item_x+1, this.item_y, temp)) {
+         this.item.x -= 1;
+      } else if (this.isSpace(this.item.x+1, this.item.y, temp)) {
         this.item = temp;
-        this.item_x += 1;
+        this.item.x += 1;
       } 
     }
   }
@@ -227,25 +227,26 @@ export class Board {
     if (this.item.constructor === Tetromino) {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateRight();
-      if (this.isSpace(this.item_x, this.item_y, temp)) {
+      if (this.isSpace(this.item.x, this.item.y, temp)) {
         this.item = temp;
-      } else if (this.isSpace(this.item_x-1, this.item_y, temp)) {
+      } else if (this.isSpace(this.item.x-1, this.item.y, temp)) {
+         this.item = temp;
+         this.item.x -= 1;
+      } else if (this.isSpace(this.item.x+1, this.item.y, temp)) {
         this.item = temp;
-        this.item_x -= 1;
-     } else if (this.isSpace(this.item_x+1, this.item_y, temp)) {
-       this.item = temp;
-       this.item_x += 1;
-     } 
+        this.item.x += 1;
+      } 
    }
   }
 
 
   tick() {
     if (this.item === undefined) {
+      //console.log("tick() this.item is undefined");
       return;
     }
     if (this.canMoveDown()) {
-      this.item_y += 1;
+      this.item.y += 1;
     } else {
       this.stopFalling();
     }
@@ -257,19 +258,19 @@ export class Board {
 
   moveLeft() {
     if (this.canMoveLeft()) {
-      this.item_x -= 1;
+      this.item.x -= 1;
     }
   }
 
   moveRight() {
     if (this.canMoveRight()) {
-      this.item_x += 1;
+      this.item.x += 1;
     }
   }
 
   moveDown() {
     if (this.canMoveDown()) {
-      this.item_y += 1;
+      this.item.y += 1;
     } else {
       this.stopFalling();
     }
@@ -289,7 +290,3 @@ export class Board {
     return res;
   }
 }
-
-/* arika = 4*4 vs. previous 1*1, 3'3  5*5
-  previous x,y was in the midlle of block, should it now be somewhere else ?
-*/
