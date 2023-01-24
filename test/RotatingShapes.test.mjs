@@ -29,7 +29,21 @@ describe("Rotating Arika shapes (4x4)", () => {
       expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
     });
 
-    // 4 kertaa kumpaan tahansa suuntaan == alkutilanne
+    xit("4 rotations right = initial orientation", () => {
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      expect(shape.toString()).to.equalShape(T);
+    });
+
+    xit("4 rotations left = initial orientation", () => {
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      expect(shape.toString()).to.equalShape(T);
+    })
 
   });
 
@@ -77,7 +91,25 @@ describe("Rotating Arika shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
-    // samat testit kuin T-shapessa
+    xit("rotating twice left = rotating twice right", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
+    });
+
+    xit("4 rotations right = initial orientation", () => {
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      expect(shape.toString()).to.equalShape(L);
+    });
+
+    xit("4 rotations left = initial orientation", () => {
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      expect(shape.toString()).to.equalShape(L);
+    })
   });
 
   describe("J shape", () => {
@@ -94,7 +126,26 @@ describe("Rotating Arika shapes (4x4)", () => {
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
-    // samat testit kuin T-shapessa
+
+    xit("rotating twice left = rotating twice right", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
+    });
+
+    xit("4 rotations right = initial orientation", () => {
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      shape.rotateRight();
+      expect(shape.toString()).to.equalShape(J);
+    });
+
+    xit("4 rotations left = initial orientation", () => {
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      shape.rotateLeft();
+      expect(shape.toString()).to.equalShape(J);
+    })
 
   });
 
