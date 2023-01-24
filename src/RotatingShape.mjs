@@ -72,6 +72,15 @@ export class RotatingShape extends Block {
   }
 
   rotateLeft() {
+    let sh = this.findShape();
+    if (sh.length > 0) {
+      let ind = sh.indexOf(this.shape);
+      ind = (ind>0) ? ind-1  : sh.length - 2; // left
+      //console.log("rotateLeft ind "+ind+" == id2 "+id2+" palauttaa "+sh[ind]);
+      return new RotatingShape(sh[ind]);
+    } 
+    // loput pois
+    console.log("rotateLeft ei löytänyt sh");
     let s = "";
     let rows = this.shape.split("\n");
     const rcount = rows.length - 1; //
