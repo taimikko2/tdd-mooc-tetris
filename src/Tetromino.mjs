@@ -1,7 +1,9 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino extends RotatingShape {
-
+  x;
+  y;
+  
   constructor(shape) {
     super(shape);
     // String.prototype.match()
@@ -9,31 +11,31 @@ export class Tetromino extends RotatingShape {
   }
 
   /* ARIKA = 4*4 */
-  static get ARIKA_T() {
+  static get T_SHAPE() {
     return new Tetromino(`....\nTTT.\n.T..\n....\n`);
   }
 
-  static get ARIKA_I() {
+  static get I_SHAPE() {
     return new Tetromino(`....\nIIII\n....\n....\n`);
   }
 
-  static get ARIKA_L() {
+  static get L_SHAPE() {
     return new Tetromino(`....\nLLL.\nL...\n....\n`);
   }
 
-  static get ARIKA_J() {
+  static get J_SHAPE() {
     return new Tetromino(`....\nJJJ.\n..J.\n....\n`);
   }
 
-  static get ARIKA_S() {
+  static get S_SHAPE() {
     return new Tetromino(`....\n.SS.\nSS..\n....\n`);
   }
 
-  static get ARIKA_Z() {
+  static get Z_SHAPE() {
     return new Tetromino(`....\nZZ..\n.ZZ.\n....\n`);
   }
 
-  static get ARIKA_O() {
+  static get O_SHAPE() {
     return new Tetromino(`....\n.OO.\n.OO.\n....\n`);
   }
 

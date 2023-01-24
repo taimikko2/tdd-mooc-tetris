@@ -53,7 +53,7 @@ export class RotatingShape extends Block {
     if (RotatingShape.J_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.J_SHAPES;
     }
-    console.log("findShape ei löytänyt (" + this.shape + ")")
+    throw "findShape not found (" + this.shape + ")";
     return ""; // ei löytynyt
   }
 
@@ -62,7 +62,6 @@ export class RotatingShape extends Block {
     let ind;
     if (sh.length > 0) {
       ind = sh.indexOf(this.shape);
-      //console.log("rotateRight ind "+ind+" palauttaa "+sh[ind+1]);
       return new RotatingShape(sh[ind + 1]);
     }
     throw "No shape found";
@@ -73,7 +72,6 @@ export class RotatingShape extends Block {
     if (sh.length > 0) {
       let ind = sh.indexOf(this.shape);
       ind = (ind > 0) ? ind - 1 : sh.length - 2; // left
-      //console.log("rotateLeft ind "+ind+" == id2 "+id2+" palauttaa "+sh[ind]);
       return new RotatingShape(sh[ind]);
     }
     throw "No shape found";
