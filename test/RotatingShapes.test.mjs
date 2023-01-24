@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { RotatingShape } from "../src/RotatingShape.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
-describe("Rotating Aria shapes (4x4)", () => {
+describe("Rotating Arika shapes (4x4)", () => {
   const T = "....\nTTT.\n.T..\n....\n";
   const I = "....\nIIII\n....\n....\n";
   const L = "....\nLLL.\nL...\n....\n";
@@ -24,6 +24,13 @@ describe("Rotating Aria shapes (4x4)", () => {
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
+
+    xit("rotating twice left = rotating twice right", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(shape.rotateRight().rotateRight().toString());
+    });
+
+    // 4 kertaa kumpaan tahansa suuntaan == alkutilanne
+
   });
 
   describe("I shape", () => {
@@ -41,6 +48,17 @@ describe("Rotating Aria shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
+    xit("rotating right twice == initial orientation", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left twice == initial orientation", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left == rotating right", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
+    });
 
   });
 
@@ -59,6 +77,7 @@ describe("Rotating Aria shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
+    // samat testit kuin T-shapessa
   });
 
   describe("J shape", () => {
@@ -75,6 +94,7 @@ describe("Rotating Aria shapes (4x4)", () => {
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
+    // samat testit kuin T-shapessa
 
   });
 
@@ -91,6 +111,18 @@ describe("Rotating Aria shapes (4x4)", () => {
 
     xit("can be rotated left/counter-clockwise", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
+    });
+
+    xit("rotating right twice == initial orientation", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left twice == initial orientation", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left == rotating right", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
     });
 
   });
@@ -110,6 +142,18 @@ describe("Rotating Aria shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape();
     });
 
+    xit("rotating right twice == initial orientation", () => {
+      expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left twice == initial orientation", () => {
+      expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
+    });
+
+    xit("rotating left == rotating right", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape(shape.rotateRight().toString());
+    });
+
   });
 
   describe("O shape", () => {
@@ -119,12 +163,12 @@ describe("Rotating Aria shapes (4x4)", () => {
       expect(shape.toString()).to.equalShape(O);
     });
 
-    xit("can be rotated right/clockwise", () => {
-      expect(shape.rotateRight().toString()).to.equalShape();
+    it("rotating right == initial orientation", () => {
+      expect(shape.rotateRight().toString()).to.equalShape(O);
     });
 
-    xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
+    it("rotating left == initial orientation", () => {
+      expect(shape.rotateLeft().toString()).to.equalShape(O);
     });
 
   });
