@@ -175,13 +175,14 @@ describe("Rotating Arika shapes (4x4)", () => {
         shape = new Tetromino(S);
         shape2 = new Tetromino(S);
       });
-
+      //`....\n.SS.\nSS..\n....\n`
+      //"S...\nSS..\n.S..\n....\n"
       it("initial orientation", () => {
         expect(shape.toString()).to.equalShape(S);
       });
   
-      xit("can be rotated right/clockwise", () => {
-        expect(shape.rotateRight().toString()).to.equalShape();
+      it("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape("S...\nSS..\n.S..\n....\n");
       });
   
       xit("can be rotated left/counter-clockwise", () => {

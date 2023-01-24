@@ -1,40 +1,11 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino extends RotatingShape {
-  type; // T,I,L,J,S,Z,O, ?
-
 
   constructor(shape) {
     super(shape);
     // String.prototype.match()
     //console.log("Tetromino shape ("+shape+") ");
-    switch (shape) {
-      case "....\nTTT.\n.T..\n....\n":
-        this.type = "T";
-        break;
-      case `....\nIIII\n....\n....\n`:
-        this.type = "I";
-        break;
-      case `....\nLLL.\nL...\n....\n`:
-        this.type = "L";
-        break;
-      case `....\nJJJ.\n..J.\n....\n`:
-        this.type = "J";
-        break;
-      case `....\n.SS.\nSS..\n....\n`:
-        this.type = "S";
-        break;
-      case `....\nZZ..\n.ZZ.\n....\n`:
-        this.type = "Z";
-        break;
-      case `....\n.OO.\n.OO.\n....\n`:
-        this.type = "O";
-        break;
-      default:
-        this.type = "?";
-        break;
-    }
-    //this.type !== "?" ? console.log("type "+ this.type+" "+ Tetromino.T_SHAPES.constructor.name) : console.log();//+" "+Tetromino.T_SHAPES);
   }
 
   /* ARIKA = 4*4 */
