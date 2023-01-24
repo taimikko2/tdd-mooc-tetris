@@ -16,6 +16,11 @@ export class RotatingShape extends Block {
     `....\n..L.\nLLL.\n....\n`,
     `.L..\n.L..\n.LL.\n....\n`,
     `....\nLLL.\nL...\n....\n`];
+  static J_SHAPES = ["....\nJJJ.\n..J.\n....\n",
+    ".J..\n.J..\nJJ..\n....\n",
+    "....\nJ...\nJJJ.\n....\n",
+    ".JJ.\n.J..\n.J..\n....\n",
+    "....\nJJJ.\n..J.\n....\n"];
 
   constructor(shape) {
     super(shape); // color ?
@@ -28,7 +33,7 @@ export class RotatingShape extends Block {
 
   findShape() {
     if (RotatingShape.O_SHAPES.indexOf(this.shape) >= 0) {
-      return RotatingShape.O_SHAPES; // joku poikkeuskäsittely ?
+      return RotatingShape.O_SHAPES; 
     }
     if (RotatingShape.I_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.I_SHAPES;
@@ -44,6 +49,9 @@ export class RotatingShape extends Block {
     }
     if (RotatingShape.L_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.L_SHAPES;
+    }
+    if (RotatingShape.J_SHAPES.indexOf(this.shape) >= 0) {
+      return RotatingShape.J_SHAPES;
     }
     console.log("findShape ei löytänyt (" + this.shape + ")")
     return ""; // ei löytynyt
