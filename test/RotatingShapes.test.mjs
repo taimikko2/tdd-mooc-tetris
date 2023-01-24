@@ -77,15 +77,15 @@ describe("Rotating Arika shapes (4x4)", () => {
       expect(shape.rotateLeft().toString()).to.equalShape("..I.\n..I.\n..I.\n..I.\n");
     });
 
-    xit("rotating right twice == initial orientation", () => {
+    it("rotating right twice == initial orientation", () => {
       expect(shape.rotateRight().rotateRight().toString()).to.equalShape(I);
     });
 
-    xit("rotating left twice == initial orientation", () => {
+    it("rotating left twice == initial orientation", () => {
       expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(I);
     });
 
-    xit("rotating left == rotating right", () => {
+    it("rotating left == rotating right", () => {
       expect(shape.rotateLeft().toString()).to.equalShape(shape2.rotateRight().toString());
     });
 

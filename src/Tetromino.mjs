@@ -7,7 +7,7 @@ export class Tetromino extends RotatingShape {
   constructor(shape) {
     super(shape);
     // String.prototype.match()
-    console.log("Tetromino shape ("+shape+") ");
+    //console.log("Tetromino shape ("+shape+") ");
     switch (shape) {
       case "....\nTTT.\n.T..\n....\n":
         this.type = "T";
@@ -159,12 +159,14 @@ export class Tetromino extends RotatingShape {
 
   checkAndFixTetro(tetro) {
     console.log("checkAndFixTetro EI pitäisi tarvita")
+    /*
     if (this.checkTop(tetro)) {
       tetro = this.fixTop(tetro);
     }
     if (this.checkLeft(tetro)) {
       tetro = this.fixLeft(tetro);
     }
+    */
     return new Tetromino(tetro.toString());
   }
 
@@ -173,7 +175,7 @@ export class Tetromino extends RotatingShape {
       return new Tetromino(this.shape);
     }
     let apu = super.rotateRight();
-    console.log("Tetromino.rotateRight tuottaa ("+apu+")");
+    //console.log("Tetromino.rotateRight tuottaa ("+apu+")");
     if (apu.toString().length <= 12) {
       return apu;
     }

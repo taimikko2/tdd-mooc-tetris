@@ -9,7 +9,7 @@ export class RotatingShape extends Block {
 
   static I_SHAPES = [`....\nIIII\n....\n....\n`,"..I.\n..I.\n..I.\n..I.\n",`....\nIIII\n....\n....\n`];
 
-  static O_SHAPES = [`....\n.OO.\n.OO.\n....\n`];
+  static O_SHAPES = [`....\n.OO.\n.OO.\n....\n`,`....\n.OO.\n.OO.\n....\n`]; // 2 samaa muotoa
 
   constructor(shape) {
     super(shape); // color ?
@@ -35,11 +35,11 @@ export class RotatingShape extends Block {
   }
 
   findShape() {
-    /*if (this.oShape() >= 0) {
+    if (this.oShape() >= 0) {
       return RotatingShape.O_SHAPES; // joku poikkeuskäsittely ?
-    } */
+    } 
     if (this.iShape() >= 0) {
-      console.log("findShape iShape");
+      //console.log("findShape iShape");
       return RotatingShape.I_SHAPES;
     } 
     /*if (this.tShape() >= 0) {
@@ -55,9 +55,10 @@ export class RotatingShape extends Block {
     let ind;
     if (sh.length > 0) {
       ind = sh.indexOf(this.shape);
-      console.log("rotateRight ind "+ind+" palauttaa "+sh[ind+1]);
+      //console.log("rotateRight ind "+ind+" palauttaa "+sh[ind+1]);
       return new RotatingShape(sh[ind+1]);
     }
+    // loput turhaa ?
     let s = "";
     let rows = this.shape.split("\n");
     const rcount = rows.length - 1; //
