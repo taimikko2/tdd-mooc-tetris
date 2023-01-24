@@ -9,16 +9,55 @@ export class RotatingShape extends Block {
 
   static I_SHAPES = [`....\nIIII\n....\n....\n`,"..I.\n..I.\n..I.\n..I.\n",`....\nIIII\n....\n....\n`];
 
+  static O_SHAPES = [`....\n.OO.\n.OO.\n....\n`];
+
   constructor(shape) {
     super(shape); // color ?
     this.shape = this.normalize(shape);
+    //this.findShape();
   }
 
   normalize(s) {
     return s.replaceAll(" ", "").trim() + "\n";
   }
 
+  iShape() {
+    // indeksi tai -1 jos ei löydy
+    return RotatingShape.I_SHAPES.indexOf(this.shape);
+  }
+  
+  tShape() {
+    return RotatingShape.T_SHAPES.indexOf(this.shape);
+  }
+
+  oShape() {
+    return RotatingShape.O_SHAPES.indexOf(this.shape);
+  }
+
+  findShape() {
+    /*if (this.oShape() >= 0) {
+      return RotatingShape.O_SHAPES; // joku poikkeuskäsittely ?
+    } */
+    if (this.iShape() >= 0) {
+      console.log("findShape iShape");
+      return RotatingShape.I_SHAPES;
+    } 
+    /*if (this.tShape() >= 0) {
+      return RotatingShape.T_SHAPES;
+    } 
+    */
+    console.log("findShape ei löytänyt ("+this.shape+")")
+    return ""; // ei löytynyt
+  }
+
   rotateRight() {
+    let sh = this.findShape();
+    let ind;
+    if (sh.length > 0) {
+      ind = sh.indexOf(this.shape);
+      console.log("rotateRight ind "+ind+" palauttaa "+sh[ind+1]);
+      return new RotatingShape(sh[ind+1]);
+    }
     let s = "";
     let rows = this.shape.split("\n");
     const rcount = rows.length - 1; //

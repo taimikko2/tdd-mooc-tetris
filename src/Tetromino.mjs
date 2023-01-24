@@ -7,7 +7,7 @@ export class Tetromino extends RotatingShape {
   constructor(shape) {
     super(shape);
     // String.prototype.match()
-    console.log("shape "+(shape == "....\nTTT.\n.T..\n....\n")+" "+shape + " ....\nTTT.\n.T..\n....\n");
+    console.log("Tetromino shape ("+shape+") ");
     switch (shape) {
       case "....\nTTT.\n.T..\n....\n":
         this.type = "T";
@@ -34,7 +34,7 @@ export class Tetromino extends RotatingShape {
         this.type = "?";
         break;
     }
-    this.type !== "?" ? console.log("type "+ this.type+" "+ Tetromino.T_SHAPES.constructor.name) : console.log();//+" "+Tetromino.T_SHAPES);
+    //this.type !== "?" ? console.log("type "+ this.type+" "+ Tetromino.T_SHAPES.constructor.name) : console.log();//+" "+Tetromino.T_SHAPES);
   }
 
   /* ARIKA = 4*4 */
@@ -119,7 +119,7 @@ export class Tetromino extends RotatingShape {
 
   fixLeft(tetro) {
     let s = tetro.toString().split("\n");
-    //console.log("fixLeft: " + s)
+    console.log("fixLeft: " + s)
     let r = s.length - 1; //
     for (let ri = 0; ri < r; ri++) {
       let rivi = s[ri];
@@ -149,7 +149,7 @@ export class Tetromino extends RotatingShape {
 
   fixTop(tetro) {
     let s = tetro.toString().split("\n");
-    //console.log("fixTop: " + s)
+    console.log("fixTop: " + s)
     let apu = s[0];
     delete s[0];
     let res = s.join("\n");
@@ -158,6 +158,7 @@ export class Tetromino extends RotatingShape {
   }
 
   checkAndFixTetro(tetro) {
+    console.log("checkAndFixTetro EI pitäisi tarvita")
     if (this.checkTop(tetro)) {
       tetro = this.fixTop(tetro);
     }
@@ -168,14 +169,15 @@ export class Tetromino extends RotatingShape {
   }
 
   rotateRight() {
-    if (this.isOsahpe()) {
+    if (this.isOsahpe() || this.shape === Tetromino.O_SHAPE) {
       return new Tetromino(this.shape);
     }
     let apu = super.rotateRight();
+    console.log("Tetromino.rotateRight tuottaa ("+apu+")");
     if (apu.toString().length <= 12) {
       return apu;
     }
-    apu = this.checkAndFixTetro(apu);
+    //apu = this.checkAndFixTetro(apu);
     return new Tetromino(apu.toString());
   }
 

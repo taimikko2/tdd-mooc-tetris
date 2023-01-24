@@ -74,7 +74,7 @@ describe("Rotating Arika shapes (4x4)", () => {
     });
 
     xit("can be rotated left/counter-clockwise", () => {
-      expect(shape.rotateLeft().toString()).to.equalShape();
+      expect(shape.rotateLeft().toString()).to.equalShape("..I.\n..I.\n..I.\n..I.\n");
     });
 
     xit("rotating right twice == initial orientation", () => {
