@@ -89,9 +89,13 @@ describe("Rotating Arika shapes (4x4)", () => {
     });
 
   });
-  /*
-    describe("L shape", () => {
   
+    describe("L shape", () => {
+      beforeEach(() => {
+        shape = new Tetromino(L);
+        shape2 = new Tetromino(L);
+      });
+    
       it("initial orientation", () => {
         expect(shape.toString()).to.equalShape(L);
       });
@@ -128,7 +132,7 @@ describe("Rotating Arika shapes (4x4)", () => {
         expect(shape.toString()).to.equalShape(L);
       })
     });
-  
+  /*
     describe("J shape", () => {
   
       it("initial orientation", () => {
