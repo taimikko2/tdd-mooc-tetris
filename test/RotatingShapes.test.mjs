@@ -220,23 +220,23 @@ describe("Rotating Arika shapes (4x4)", () => {
         expect(shape.rotateRight().toString()).to.equalShape('..Z.\n.ZZ.\n.Z..\n....\n');
       });
   
-      xit("can be rotated left/counter-clockwise", () => {
-        expect(shape.rotateLeft().toString()).to.equalShape();
+      it("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape('..Z.\n.ZZ.\n.Z..\n....\n');
       });
   
-      xit("rotating twice right", () => {
-        expect(shape.rotateRight().rotateRight().toString()).to.equalShape();
-      });
-  
-      xit("rotating right twice == initial orientation", () => {
+      it("rotating twice right", () => {
         expect(shape.rotateRight().rotateRight().toString()).to.equalShape(Z);
       });
   
-      xit("rotating left twice == initial orientation", () => {
+      it("rotating right twice == initial orientation", () => {
+        expect(shape.rotateRight().rotateRight().toString()).to.equalShape(Z);
+      });
+  
+      it("rotating left twice == initial orientation", () => {
         expect(shape.rotateLeft().rotateLeft().toString()).to.equalShape(Z);
       });
   
-      xit("rotating left == rotating right", () => {
+      it("rotating left == rotating right", () => {
         expect(shape.rotateLeft().toString()).to.equalShape(shape2.rotateRight().toString());
       });
   
