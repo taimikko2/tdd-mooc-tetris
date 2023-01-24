@@ -20,11 +20,11 @@ describe("Rotating Arika shapes (4x4)", () => {
       shape2 = new Tetromino(T);
     });
 
-    xit("initial orientation", () => {
+    it("initial orientation", () => {
       expect(shape.toString()).to.equalShape(T);
     });
 
-    xit("can be rotated right/clockwise", () => {
+    it("can be rotated right/clockwise", () => {
       expect(shape.rotateRight().toString()).to.equalShape('.T..\nTT..\n.T..\n....\n');
     });
 
