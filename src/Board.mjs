@@ -5,6 +5,7 @@ export class Board {
   canvas;
   falling;
   item;
+  observers;
   // vain yksi palikka liikkuu kerrallaan -> tarvitaan vain yksi item ja loput on canvasta
 
   constructor(width, height) {
@@ -15,6 +16,40 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       this.canvas[i] = new Array(width);
       this.canvas[i].fill(".");
+    }
+    this.observers = new Array();
+  }
+
+  attach(observer) {
+    const isExist = this.observers.includes(observer);
+    if (isExist) {
+        return console.log('Subcriber has been attached already.');
+    }
+    console.log('Attached an observer '+observer.constructor.name);
+    this.observers.push(observer);
+  }
+
+  detach(observer) {
+    const observerIndex = this.observers.indexOf(observer);
+    if (observerIndex === -1) {
+        return console.log('Nonexistent observer.');
+    }
+
+    this.observers.splice(observerIndex, 1);
+    console.log('Detached an observer '+observer.constructor.name);
+  }
+
+  notify(lines) {
+    console.log('Notifying observers...');
+    for (const observer of this.observers) {
+      observer.update(this);  // should be linesRemoved
+    }
+  }
+  
+  notifyLines(lines) {
+    console.log('Notifying observers...');
+    for (const observer of this.observers) {
+      observer.updateLines(lines);  
     }
   }
 

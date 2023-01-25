@@ -1,26 +1,27 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
+import { Scoring } from "../src/Scoring.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 describe("Scoring", () => {
     let board;
+    let score;
     beforeEach(() => {
         board = new Board(6, 6);
+        score = new Scoring();
+        board.attach(score);
         //board.drop(Tetromino.I_SHAPE);
         //board.tick();
     });
 
     //describe("some grouping", () => {    });
-    xit("it starts from 0 points", () => {
-        // board.drop(Tetromino.I_SHAPE);
-        // board.tick();
+    it("it starts from 0 points", () => {
+        board.drop(Tetromino.I_SHAPE);
+        board.tick();
+        board.notify(0);
+        board.notifyLines(2);
         // board.moveDown();
-        // expect(board.toString()).to.equalShape(
-        //     `....
-        //     ....
-        //     ....
-        //     ....`
-        // );
+        expect(score.score).to.equal(0);
     });
 
     xit("clean one line", () => {
