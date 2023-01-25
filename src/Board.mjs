@@ -201,6 +201,7 @@ export class Board {
         this.item.x += 1;
       }
     }
+    this.cleanLine();
   }
 
   rotateRight() {
@@ -217,6 +218,7 @@ export class Board {
         this.item.x += 1;
       }
     }
+    this.cleanLine();
   }
 
   tick() {
@@ -229,6 +231,7 @@ export class Board {
     } else {
       this.stopFalling();
     }
+    this.cleanLine();
   }
 
   hasFalling() {
@@ -239,12 +242,14 @@ export class Board {
     if (this.canMoveLeft()) {
       this.item.x -= 1;
     }
+    this.cleanLine();
   }
 
   moveRight() {
     if (this.canMoveRight()) {
       this.item.x += 1;
     }
+    this.cleanLine();
   }
 
   moveDown() {
@@ -253,29 +258,32 @@ export class Board {
     } else {
       this.stopFalling();
     }
+    this.cleanLine();
   }
 
   cleanLine() {
     // 1. full line can be only where the movng block is (others have beeb cleaned already)
     // 2. After cleaning, upper rows may be dropped an new full lines mey exist
     // At first check only une line at a time
-    console.log("cleanLine " + this.height);
+    console.log("cleanLine height " + this.height);
     let full;
     let remove = [];
     let can = this.toString().trim().split("\n");
+    const empty = (e) => e != ".";
+
     for (let i = 0; i < this.height; i++) {
       // == can.length
-      full = can[i].split(".").some((s) => s) === true;
+      full = can[i].indexOf(".") < 0; 
       if (full) {
         remove.push(i);
-        //console.log(i + " full " + full);
+        console.log(i + " full " + full+" "+can[i]);
       }
     }
     if (remove.length > 0) {
       console.log("remove " + remove.length + " " + remove);
       let montako = remove.length; // single, double, triple, tetris
       for (let i = 0; i < remove.length; i++) {
-        this.removeLine(i);
+        this.removeLine(remove[i]);
       }
       this.item = undefined; // jos löytyi niin poistetaan rivit ja this.item
     }
@@ -286,6 +294,7 @@ export class Board {
 
   removeLine(line) {
     // posta rivejä canvakselta thsi.canvas
+    console.log("removeLine("+line+") "+this.canvas[line]+"\n canvas "+this.canvas);
     this.canvas[line] = new Array(this.width);
     this.canvas[line].fill(".");
     // siirretään samalla ylempänä olevia rivillä alaspäin ??
