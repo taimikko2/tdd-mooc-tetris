@@ -136,7 +136,7 @@ export class Board {
     }
     if (this.item.toString().trim().length == 1) {
       if (this.item.x >= this.width - 1) {
-        return false; 
+        return false;
       }
       let row = this.canvas[this.item.y]; // samalla rivillä
       return row[this.item.x + 1] === "."; // inko item:in kohdalla tilaa "."
@@ -164,10 +164,10 @@ export class Board {
         // jos shapessa on jotain muuta kuin "."
         // niin canvaksella tarvitaan tilaa siinä kohtaa
         if (block[r][j] !== ".") {
-          if ((vasen + j) > this.width - 1) {
+          if (vasen + j > this.width - 1) {
             return false; // osa palikasta on ulkopuolella
           }
-          if ((vasen + j) < 0) {
+          if (vasen + j < 0) {
             return false; // osa palikasta on ulkopuolella
           }
           if (ylare + r >= this.height) {
@@ -219,7 +219,6 @@ export class Board {
     }
   }
 
-
   tick() {
     if (this.item === undefined) {
       //console.log("tick() this.item is undefined");
@@ -260,27 +259,27 @@ export class Board {
     // 1. full line can be only where the movng block is (others have beeb cleaned already)
     // 2. After cleaning, upper rows may be dropped an new full lines mey exist
     // At first check only une line at a time
-    console.log("cleanLine "+this.height);
+    console.log("cleanLine " + this.height);
     let full;
-    let remove=[];
+    let remove = [];
     let can = this.toString().trim().split("\n");
-    for (let i = 0; i < this.height; i++) { // == can.length
+    for (let i = 0; i < this.height; i++) {
+      // == can.length
       full = can[i].split(".").some((s) => s) === true;
       if (full) {
-        // poista rivi : 
+        // poista rivi :
         remove.push(i);
-        console.log(i+" full "+full);
+        console.log(i + " full " + full);
       }
     }
     if (remove.length > 0) {
-      console.log("remove "+remove.length+" "+remove); 
+      console.log("remove " + remove.length + " " + remove);
       // single, double, triple, tetris
       // jos löytyi niin poistetaan rivit ja this.item
     }
     // siirretään yllä olevia palikoita alaspäin
     // naive gravity vs. sticky
     // new check after gravity ?
-    
   }
 
   toString() {
