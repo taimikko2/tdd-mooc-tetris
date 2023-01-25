@@ -2,10 +2,17 @@ import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
+// let board;
+// function toista(n, f) {
+//     for (let i = 0; i < n; i++) {
+//         f();
+//     }
+// };
+
 describe("Clean lines", () => {
     let board;
     beforeEach(() => {
-        board = new Board(4, 4);
+        board = new Board(6, 6);
         //board.drop(Tetromino.I_SHAPE);
         //board.tick();
     });
@@ -25,7 +32,7 @@ describe("Clean lines", () => {
                 ....`
             );
         });
-        
+
         it("it is removed when line is full in the midlle of canvas", () => {
             board = new Board(5, 6);
             board.drop(Tetromino.I_SHAPE);
@@ -53,22 +60,42 @@ describe("Clean lines", () => {
 
 
     describe("Two lines", () => {
-        xit("2 lines removed from bottom when full", () => {
+        it("2 lines removed when full", () => {
+            board = new Board(5, 6);
             board.drop(Tetromino.I_SHAPE);
-            //board.rotateLeft();
+            board.rotateLeft();
+            board.moveRight();
+            //toista(3, board.tick);
             board.tick();
-            board.moveDown();
-            //---
+            board.tick();
             board.tick();
             board.drop(Tetromino.I_SHAPE);
+            board.rotateLeft();
+            board.moveLeft();
+            board.moveLeft();
+            board.moveLeft();
             board.tick();
             board.tick();
-            board.cleanLine();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.rotateLeft();
+            board.moveLeft();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.rotateRight();
+            board.moveRight();
+            board.tick();
+            board.tick();
             expect(board.toString()).to.equalShape(
-                `....
-         ....
-         ....
-         ....`
+                `.....
+                 .....
+                 I...I
+                 .....
+                 .....
+                 IT..I`
             );
         });
     });
