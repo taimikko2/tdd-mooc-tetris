@@ -79,7 +79,8 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        /*xit("it cannot be rotated when there is no room to rotate", () => {
+            // kicks always -> no test available
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -94,9 +95,9 @@ describe("Rotating falling tetrominoes", () => {
                  ........
                  ........`
             );
-        });
+        });*/
 
-        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -115,7 +116,7 @@ describe("Rotating falling tetrominoes", () => {
     });
 
     describe("left bottom corner", () => {
-        xit("a falling tetromino can be rotated", () => {
+        it("a falling tetromino can be rotated", () => {
             board.moveLeft();
             board.tick();
             board.tick();
@@ -124,8 +125,6 @@ describe("Rotating falling tetrominoes", () => {
             board.rotateLeft();
             expect(board.toString()).to.equalShape(
                 `........
-                 ........
-                 ........
                  ........
                  ..I.....
                  ..I.....
