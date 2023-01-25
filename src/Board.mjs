@@ -39,15 +39,15 @@ export class Board {
     console.log('Detached an observer '+observer.constructor.name);
   }
 
-  notify(lines) {
+  notify() {
     console.log('Notifying observers...');
     for (const observer of this.observers) {
-      observer.update(this);  // should be linesRemoved
+      observer.update(this);  
     }
   }
   
   notifyLines(lines) {
-    console.log('Notifying observers...');
+    console.log('Notifying observers... ('+lines+')');
     for (const observer of this.observers) {
       observer.updateLines(lines);  
     }
@@ -307,12 +307,11 @@ export class Board {
       }
     }
     if (remove.length > 0) {
-      console.log("remove " + remove.length + " " + remove);
-      //let montako = remove.length; // single, double, triple, tetris
       for (let i = 0; i < remove.length; i++) {
         this.removeLine(remove[i]);
       }
       this.item = undefined; // jos löytyi niin poistetaan rivit ja this.item
+      this.notifyLines(remove.length); // single, double, triple, tetris
     }
   }
 
