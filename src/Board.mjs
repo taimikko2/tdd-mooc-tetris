@@ -256,6 +256,33 @@ export class Board {
     }
   }
 
+  cleanLine() {
+    // 1. full line can be only where the movng block is (others have beeb cleaned already)
+    // 2. After cleaning, upper rows may be dropped an new full lines mey exist
+    // At first check only une line at a time
+    console.log("cleanLine "+this.height);
+    let full;
+    let remove=[];
+    let can = this.toString().trim().split("\n");
+    for (let i = 0; i < this.height; i++) { // == can.length
+      full = can[i].split(".").some((s) => s) === true;
+      if (full) {
+        // poista rivi : 
+        remove.push(i);
+        console.log(i+" full "+full);
+      }
+    }
+    if (remove.length > 0) {
+      console.log("remove "+remove.length+" "+remove); 
+      // single, double, triple, tetris
+      // jos löytyi niin poistetaan rivit ja this.item
+    }
+    // siirretään yllä olevia palikoita alaspäin
+    // naive gravity vs. sticky
+    // new check after gravity ?
+    
+  }
+
   toString() {
     // kopioi canvas ja lisää siihen this.item:in shape
     let res = "";

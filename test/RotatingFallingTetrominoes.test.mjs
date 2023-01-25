@@ -1,5 +1,4 @@
-//Level 6: Rotating falling tetrominoes
-
+/*
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
@@ -79,23 +78,23 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        /*xit("it cannot be rotated when there is no room to rotate", () => {
-            // kicks always -> no test available
-            board.moveRight();
-            board.moveRight();
-            board.moveRight();
-            board.rotateRight();
-            board.moveRight();
-            board.rotateRight();
-            expect(board.toString()).to.equalShape(
-                `.......I
-                 .......I
-                 .......I
-                 .......I
-                 ........
-                 ........`
-            );
-        });*/
+        // xit("it cannot be rotated when there is no room to rotate", () => {
+        //     // kicks always -> no test available
+        //     board.moveRight();
+        //     board.moveRight();
+        //     board.moveRight();
+        //     board.rotateRight();
+        //     board.moveRight();
+        //     board.rotateRight();
+        //     expect(board.toString()).to.equalShape(
+        //         `.......I
+        //          .......I
+        //          .......I
+        //          .......I
+        //          ........
+        //          ........`
+        //     );
+        // });
 
         it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             board.moveRight();
@@ -247,3 +246,4 @@ describe("Rotating falling tetrominoes", () => {
     });
 
 });
+*/

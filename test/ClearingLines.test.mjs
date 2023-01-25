@@ -16,6 +16,29 @@ describe("Clean lines", () => {
             //board.rotateLeft();
             board.tick();
             board.moveDown();
+            board.cleanLine();
+            expect(board.toString()).to.equalShape(
+                `....
+                ....
+                ....
+                ....`
+            );
+        });
+
+    });
+
+    describe("Two lines", () => {
+        xit("2 lines removed from bottom when full", () => {
+            board.drop(Tetromino.I_SHAPE);
+            //board.rotateLeft();
+            board.tick();
+            board.moveDown();
+            //---
+            board.tick();
+            board.drop(Tetromino.I_SHAPE);
+            board.tick();
+            board.tick();
+            board.cleanLine();
             expect(board.toString()).to.equalShape(
                 `....
                 ....
