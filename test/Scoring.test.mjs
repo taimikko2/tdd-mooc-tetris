@@ -92,7 +92,10 @@ describe("Scoring", () => {
         expect(score.score).to.equal(100);
     });
 
-    xit("points added to previous when cleaning continues", () => {
+    it("points added to previous when cleaning continues", () => {
+        // board = new Board(5, 6);
+        // score = new Scoring();
+        // board.attach(score);
         board.rotateLeft();
         leftRepeat(5);
         tickRepeat(5);
@@ -102,16 +105,31 @@ describe("Scoring", () => {
         board.moveRight();
         tickRepeat(5);
         board.drop(Tetromino.I_SHAPE);
-        board.moveDown();
+        tickRepeat(5);  // eka rivi poistuu -> 40
+       
+        board.drop(Tetromino.I_SHAPE);
+        board.tick();
+        board.rotateLeft();
+        leftRepeat(5);
+        tickRepeat(5);
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+        board.moveLeft();
+        tickRepeat(5);
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.moveRight();
+        board.moveRight();
+        tickRepeat(3); // 2 riviä --> +100 pistettä
         expect(board.toString()).to.equalShape(
             `......
             ......
             ......
-            I....I
-            I....I
-            I....I`
+            ......
+            .I....
+            IIT..I`
         );
-        expect(score.score).to.equal(40);
+        expect(score.score).to.equal(140);
     });
 
 });

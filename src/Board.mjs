@@ -311,6 +311,7 @@ export class Board {
         this.removeLine(remove[i]);
       }
       this.item = undefined; // jos löytyi niin poistetaan rivit ja this.item
+      this.falling = false;
       this.notifyLines(remove.length); // single, double, triple, tetris
     }
   }
