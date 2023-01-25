@@ -189,7 +189,6 @@ export class Board {
 
   rotateLeft() {
     if (this.item !== undefined && this.item.constructor === Tetromino) {
-      // console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateLeft();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
         this.item = temp;
@@ -206,7 +205,6 @@ export class Board {
 
   rotateRight() {
     if (this.item !== undefined && this.item.constructor === Tetromino) {
-      //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateRight();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
         this.item = temp;
@@ -223,7 +221,6 @@ export class Board {
 
   tick() {
     if (this.item === undefined) {
-      //console.log("tick() this.item is undefined");
       return;
     }
     if (this.canMoveDown()) {
@@ -262,43 +259,41 @@ export class Board {
   }
 
   cleanLine() {
-    // 1. full line can be only where the movng block is (others have beeb cleaned already)
-    // 2. After cleaning, upper rows may be dropped an new full lines mey exist
+    // Full line can be only where the moving block is (others have been cleaned already)
+    // After cleaning, upper rows may be dropped an new full lines mey exist
     // At first check only une line at a time
-    console.log("cleanLine height " + this.height);
     let full;
     let remove = [];
     let can = this.toString().trim().split("\n");
-    const empty = (e) => e != ".";
-
     for (let i = 0; i < this.height; i++) {
-      // == can.length
       full = can[i].indexOf(".") < 0; 
       if (full) {
         remove.push(i);
-        console.log(i + " full " + full+" "+can[i]);
       }
     }
     if (remove.length > 0) {
       console.log("remove " + remove.length + " " + remove);
-      let montako = remove.length; // single, double, triple, tetris
+      //let montako = remove.length; // single, double, triple, tetris
       for (let i = 0; i < remove.length; i++) {
         this.removeLine(remove[i]);
       }
       this.item = undefined; // jos löytyi niin poistetaan rivit ja this.item
     }
-    // siirretään yllä olevia palikoita alaspäin
-    // naive gravity vs. sticky
-    // new check after gravity ?
   }
 
   removeLine(line) {
     // posta rivejä canvakselta thsi.canvas
-    console.log("removeLine("+line+") "+this.canvas[line]+"\n canvas "+this.canvas);
     this.canvas[line] = new Array(this.width);
-    this.canvas[line].fill(".");
-    // siirretään samalla ylempänä olevia rivillä alaspäin ??
-    // this.canvas[line] = this.canvas[line - 1]; // ja edelleen ylöspäin
+    this.naiveGravity(line);
+  }
+
+  naiveGravity(line) {
+    // move upper lines down 1 row
+    for (let i = line; i>0; i--) {
+      this.canvas[i] = this.canvas[i-1];
+    }
+    this.canvas[0] = new Array(this.width);
+    this.canvas[0].fill(".");
   }
 
   toString() {
