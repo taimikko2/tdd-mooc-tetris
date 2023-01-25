@@ -98,5 +98,45 @@ describe("Clean lines", () => {
                  IT..I`
             );
         });
+
+        it("clean 2 lines and naive gravity", () => {
+            board = new Board(5, 6);
+            board.drop(Tetromino.I_SHAPE);
+            board.rotateLeft();
+            board.moveRight();
+            //toista(3, board.tick);
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.I_SHAPE);
+            board.rotateLeft();
+            board.moveLeft();
+            board.moveLeft();
+            board.moveLeft();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.rotateLeft();
+            board.moveLeft();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.tick();
+            board.drop(Tetromino.T_SHAPE);
+            board.rotateRight();
+            board.moveRight();
+            board.tick();
+            board.tick();
+            expect(board.toString()).to.equalShape(
+                `.....
+                 .....
+                 .....
+                 .....
+                 I...I
+                 IT..I`
+            );
+        });
+
     });
 });
