@@ -53,8 +53,7 @@ export class RotatingShape extends Block {
     if (RotatingShape.J_SHAPES.indexOf(this.shape) >= 0) {
       return RotatingShape.J_SHAPES;
     }
-    throw "findShape not found (" + this.shape + ")";
-    return ""; // ei löytynyt
+    throw new Error("findShape not found (" + this.shape + ")");
   }
 
   rotateRight() {
@@ -64,7 +63,8 @@ export class RotatingShape extends Block {
       ind = sh.indexOf(this.shape);
       return new RotatingShape(sh[ind + 1]);
     }
-    throw "No shape found";
+    throw new Error("No shape found (rotateRight)");
+    // return new RotatingShape(this.shape); // voitaisiin palauttaa nykyinen 
   }
 
   rotateLeft() {
@@ -74,7 +74,7 @@ export class RotatingShape extends Block {
       ind = (ind > 0) ? ind - 1 : sh.length - 2; // left
       return new RotatingShape(sh[ind]);
     }
-    throw "No shape found";
+    throw new Error("No shape found (rotateLeft)");
   }
 
   toString() {

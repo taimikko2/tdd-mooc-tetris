@@ -20,7 +20,7 @@ export class Board {
 
   drop(item) {
     if (this.falling) {
-      throw "already falling";
+      throw new Error("already falling");
     }
     this.falling = true;
     this.item = item;
@@ -37,10 +37,8 @@ export class Board {
   addBlockToCanvas(canStr) {
     // this.item piirretään canvakselle
     if (this.item === undefined) {
-      //console.log("tyhjä canvas, ei ole dropattu vielä mitään");
       return canStr; // pitääkö muuttaa takaisin stringiksi ?
     }
-    //console.log("this.item is not undefined "+this.item)
     let can;
     if (canStr === undefined) {
       //console.log("update this.canvas permanently");
@@ -71,7 +69,7 @@ export class Board {
               can[ylare + r][vasen + i] = row[i];
             }
           }
-        } 
+        }
       }
     }
     // muuta can takaisin stringiksi
@@ -85,25 +83,19 @@ export class Board {
   }
 
   stopFalling() {
-    if (this.item === undefined) {
-      //console.log("stopFalling undefined");
-      return;
-    }
-    if (this.item.isFalling()) {
+    if (this.item !== undefined && this.item.isFalling()) {
       this.item.stopFalling();
       this.falling = false;
-      this.addBlockToCanvas(); // tässä pitää lisätä pysyvälle canvakselle
-      this.item = undefined; // vai null ??
+      this.addBlockToCanvas(); // lisätään pysyvälle canvakselle
+      this.item = undefined;
     }
   }
 
   canMoveDown() {
     // hae this.itemin paikka ja katso onko sille tilaa siirtyä alaspäin
-    // jos ei ole , niin palauta false
     if (this.item === undefined) {
       return false;
     }
-
     if (this.item.y >= this.height - 1) {
       return false;
     }
@@ -125,9 +117,9 @@ export class Board {
     }
     if (this.item.toString().trim().length == 1) {
       if (this.item.x <= 0) {
-        return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
+        return false;
       }
-        let row = this.canvas[this.item.y]; // samalla rivillä
+      let row = this.canvas[this.item.y]; // samalla rivillä
       return row[this.item.x - 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
       if (this.isSpace(this.item.x - 1, this.item.y, this.item)) {
@@ -144,9 +136,9 @@ export class Board {
     }
     if (this.item.toString().trim().length == 1) {
       if (this.item.x >= this.width - 1) {
-        return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
+        return false; 
       }
-        let row = this.canvas[this.item.y]; // samalla rivillä
+      let row = this.canvas[this.item.y]; // samalla rivillä
       return row[this.item.x + 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
       if (this.isSpace(this.item.x + 1, this.item.y, this.item)) {
