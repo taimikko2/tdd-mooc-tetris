@@ -68,13 +68,10 @@ export class Board {
         if (ylare + r < this.height) {
           for (let i = 0; i < row.length; i++) {
             if (row[i] !== ".") {
-              console.log("uusi: can[" + ylare + "+" + r + "][" + vasen + "+" + i + "] ylä = " + (ylare + r) + " mahtuu " + this.height)
               can[ylare + r][vasen + i] = row[i];
             }
           }
-        } else {
-          console.log("uusi: can[" + ylare + "+" + r + "][] ylä = " + (ylare + r) + " > " + this.height);
-        }
+        } 
       }
     }
     // muuta can takaisin stringiksi
@@ -84,7 +81,6 @@ export class Board {
       temp = can[i].join("");
       res += temp + "\n";
     }
-    //console.log("addBlockToCanvas paluu \n" + res)
     return res;
   }
 
@@ -200,13 +196,11 @@ export class Board {
   }
 
   rotateLeft() {
-    if (this.item.constructor === Tetromino) {
-      console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
+    if (this.item !== undefined && this.item.constructor === Tetromino) {
+      // console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateLeft();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
-        console.log("rotateLeft mahtuu")
         this.item = temp;
-        console.log("rotateLeft "+this.item.x +","+this.item.y+" "+this.item.shape.toString())
       } else if (this.isSpace(this.item.x - 1, this.item.y, temp)) {
         this.item = temp;
         this.item.x -= 1;
@@ -218,7 +212,7 @@ export class Board {
   }
 
   rotateRight() {
-    if (this.item.constructor === Tetromino) {
+    if (this.item !== undefined && this.item.constructor === Tetromino) {
       //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateRight();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
