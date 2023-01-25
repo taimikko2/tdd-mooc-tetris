@@ -1,4 +1,3 @@
-/*
 //Level 6: Rotating falling tetrominoes
 
 import { expect } from "chai";
@@ -29,7 +28,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        xit("it cannot be rotated when there is no room to rotate", () => {
             board.moveLeft();
             board.rotateLeft();
             board.moveLeft();
@@ -47,7 +46,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         })
 
-        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             board.moveLeft();
             board.rotateLeft();
             board.moveLeft();
@@ -68,7 +67,7 @@ describe("Rotating falling tetrominoes", () => {
     });
 
     describe("right top corner", () => {
-        it("a falling tetromino can be rotated", () => {
+        xit("a falling tetromino can be rotated", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -85,7 +84,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        xit("it cannot be rotated when there is no room to rotate", () => {
             for (let i = 0; i<10; i++) {
                 board.tick();
             }
@@ -109,7 +108,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             it("a falling tetromino can be rotated", () => {
                 board.moveRight();
                 board.moveRight();
@@ -131,7 +130,7 @@ describe("Rotating falling tetrominoes", () => {
     });
 
     describe("left bottom corner", () => {
-        it("a falling tetromino can be rotated", () => {
+        xit("a falling tetromino can be rotated", () => {
             board.moveLeft();
             board.tick();
             board.tick();
@@ -150,7 +149,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        xit("it cannot be rotated when there is no room to rotate", () => {
             board.moveLeft();
             board.tick();
             board.tick();
@@ -173,7 +172,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         })
 
-        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             board.moveLeft();
             board.tick();
             board.tick();
@@ -198,7 +197,7 @@ describe("Rotating falling tetrominoes", () => {
     });
 
     describe("right bottom corner", () => {
-        it("a falling tetromino can be rotated", () => {
+        xit("a falling tetromino can be rotated", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -219,7 +218,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("it cannot be rotated when there is no room to rotate", () => {
+        xit("it cannot be rotated when there is no room to rotate", () => {
             board.moveLeft();
             board.moveLeft();
             //board.rotateLeft();
@@ -250,7 +249,7 @@ describe("Rotating falling tetrominoes", () => {
             );
         });
 
-        it("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
+        xit("wall kick: when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible", () => {
             board.moveRight();
             board.moveRight();
             board.moveRight();
@@ -276,4 +275,3 @@ describe("Rotating falling tetrominoes", () => {
     });
 
 });
-*/
