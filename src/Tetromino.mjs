@@ -3,7 +3,7 @@ import { RotatingShape } from "./RotatingShape.mjs";
 export class Tetromino extends RotatingShape {
   x;
   y;
-  
+
   constructor(shape) {
     super(shape);
     // String.prototype.match()
@@ -101,10 +101,16 @@ export class Tetromino extends RotatingShape {
   }
 
   rotateRight() {
-    return new Tetromino(super.rotateRight().toString());
+    let t = new Tetromino(super.rotateRight().toString());
+    t.x = this.x;
+    t.y = this.y;
+    return t;
   }
 
   rotateLeft() {
-    return new Tetromino(super.rotateLeft().toString());
+    let t = new Tetromino(super.rotateLeft().toString());
+    t.x = this.x;
+    t.y = this.y;
+    return t;
   }
 }

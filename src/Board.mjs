@@ -65,14 +65,15 @@ export class Board {
       let row;
       for (let r = 0; r < block.length; r++) {
         row = block[r];
-        if (ylare+r >= this.height) {
-          // loppu kuvasta on canvaksen alapuolella
-          continue;
-        }
-        for (let i = 0; i < row.length; i++) {
-          if (row[i] !== ".") {
-            can[ylare + r][vasen + i] = row[i];
+        if (ylare + r < this.height) {
+          for (let i = 0; i < row.length; i++) {
+            if (row[i] !== ".") {
+              console.log("uusi: can[" + ylare + "+" + r + "][" + vasen + "+" + i + "] ylä = " + (ylare + r) + " mahtuu " + this.height)
+              can[ylare + r][vasen + i] = row[i];
+            }
           }
+        } else {
+          console.log("uusi: can[" + ylare + "+" + r + "][] ylä = " + (ylare + r) + " > " + this.height);
         }
       }
     }
@@ -123,14 +124,14 @@ export class Board {
 
   canMoveLeft() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä vasemmalle
-    if (this.item === undefined) { 
+    if (this.item === undefined) {
       return false; // nothing to move anymore
     }
-    if (this.item.x <= 0) {
-      return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
-    }
     if (this.item.toString().trim().length == 1) {
-      let row = this.canvas[this.item.y]; // samalla rivillä
+      if (this.item.x <= 0) {
+        return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
+      }
+        let row = this.canvas[this.item.y]; // samalla rivillä
       return row[this.item.x - 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
       if (this.isSpace(this.item.x - 1, this.item.y, this.item)) {
@@ -142,14 +143,14 @@ export class Board {
 
   canMoveRight() {
     // hae this.itemin paikka ja kasto onko sille tilaa siirtyä oikealle
-    if (this.item === undefined) { 
+    if (this.item === undefined) {
       return false; // nothing to move anymore
     }
-    if (this.item.x >= this.width - 1) {
-      return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
-    }
     if (this.item.toString().trim().length == 1) {
-      let row = this.canvas[this.item.y]; // samalla rivillä
+      if (this.item.x >= this.width - 1) {
+        return false; // jos keskikohta on jo reunassa, niin ei voi enää siirtää
+      }
+        let row = this.canvas[this.item.y]; // samalla rivillä
       return row[this.item.x + 1] === "."; // inko item:in kohdalla tilaa "."
     } else {
       if (this.isSpace(this.item.x + 1, this.item.y, this.item)) {
@@ -175,7 +176,7 @@ export class Board {
         // jos shapessa on jotain muuta kuin "."
         // niin canvaksella tarvitaan tilaa siinä kohtaa
         if (block[r][j] !== ".") {
-          if ((vasen + j) > this.width -1) {
+          if ((vasen + j) > this.width - 1) {
             return false; // osa palikasta on ulkopuolella
           }
           if ((vasen + j) < 0) {
@@ -200,17 +201,19 @@ export class Board {
 
   rotateLeft() {
     if (this.item.constructor === Tetromino) {
-      //console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
+      console.log("this.item.constructor.name (\"Tetromino\") = "+ this.item.constructor.name);
       let temp = this.item.rotateLeft();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
+        console.log("rotateLeft mahtuu")
         this.item = temp;
-      } else if (this.isSpace(this.item.x-1, this.item.y, temp)) {
-         this.item = temp;
-         this.item.x -= 1;
-      } else if (this.isSpace(this.item.x+1, this.item.y, temp)) {
+        console.log("rotateLeft "+this.item.x +","+this.item.y+" "+this.item.shape.toString())
+      } else if (this.isSpace(this.item.x - 1, this.item.y, temp)) {
+        this.item = temp;
+        this.item.x -= 1;
+      } else if (this.isSpace(this.item.x + 1, this.item.y, temp)) {
         this.item = temp;
         this.item.x += 1;
-      } 
+      }
     }
   }
 
@@ -220,14 +223,14 @@ export class Board {
       let temp = this.item.rotateRight();
       if (this.isSpace(this.item.x, this.item.y, temp)) {
         this.item = temp;
-      } else if (this.isSpace(this.item.x-1, this.item.y, temp)) {
-         this.item = temp;
-         this.item.x -= 1;
-      } else if (this.isSpace(this.item.x+1, this.item.y, temp)) {
+      } else if (this.isSpace(this.item.x - 1, this.item.y, temp)) {
+        this.item = temp;
+        this.item.x -= 1;
+      } else if (this.isSpace(this.item.x + 1, this.item.y, temp)) {
         this.item = temp;
         this.item.x += 1;
-      } 
-   }
+      }
+    }
   }
 
 
