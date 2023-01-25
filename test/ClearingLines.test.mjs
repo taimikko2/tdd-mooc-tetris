@@ -11,7 +11,7 @@ describe("Clean lines", () => {
     });
 
     describe("Single line", () => {
-        xit("it is removed when the bottom line is full", () => {
+        it("it is removed when the bottom line is full", () => {
             board.drop(Tetromino.I_SHAPE);
             //board.rotateLeft();
             board.tick();

@@ -267,19 +267,29 @@ export class Board {
       // == can.length
       full = can[i].split(".").some((s) => s) === true;
       if (full) {
-        // poista rivi :
         remove.push(i);
-        console.log(i + " full " + full);
+        //console.log(i + " full " + full);
       }
     }
     if (remove.length > 0) {
       console.log("remove " + remove.length + " " + remove);
-      // single, double, triple, tetris
-      // jos löytyi niin poistetaan rivit ja this.item
+      let montako = remove.length; // single, double, triple, tetris
+      for (let i = 0; i < remove.length; i++) {
+        this.removeLine(i);
+      }
+      this.item = undefined; // jos löytyi niin poistetaan rivit ja this.item
     }
     // siirretään yllä olevia palikoita alaspäin
     // naive gravity vs. sticky
     // new check after gravity ?
+  }
+
+  removeLine(line) {
+    // posta rivejä canvakselta thsi.canvas
+    this.canvas[line] = new Array(this.width);
+    this.canvas[line].fill(".");
+    // siirretään samalla ylempänä olevia rivillä alaspäin ??
+    // this.canvas[line] = this.canvas[line - 1]; // ja edelleen ylöspäin
   }
 
   toString() {
