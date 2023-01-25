@@ -60,11 +60,58 @@ describe("Scoring", () => {
         expect(score.score).to.equal(40);
     });
 
-    xit("clean 2 lines", () => {
+    it("clean 2 lines", () => {
+        board = new Board(5, 6);
+        score = new Scoring();
+        board.attach(score);
+        board.drop(Tetromino.I_SHAPE);
+        board.rotateLeft();
+        leftRepeat(5);
+        tickRepeat(5);
+        board.drop(Tetromino.I_SHAPE);
+        board.rotateRight();
+        board.moveRight();
+        board.moveRight();
+        tickRepeat(5);
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+        board.moveLeft();
+        tickRepeat(5);
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.moveRight();
+        tickRepeat(3);
+        expect(board.toString()).to.equalShape(
+            `.....
+            .....
+            .....
+            .....
+            I...I
+            IT..I`
+        );
+        expect(score.score).to.equal(100);
     });
 
     xit("points added to previous when cleaning continues", () => {
-        // 
+        board.rotateLeft();
+        leftRepeat(5);
+        tickRepeat(5);
+        board.drop(Tetromino.I_SHAPE);
+        board.rotateRight();
+        board.moveRight();
+        board.moveRight();
+        tickRepeat(5);
+        board.drop(Tetromino.I_SHAPE);
+        board.moveDown();
+        expect(board.toString()).to.equalShape(
+            `......
+            ......
+            ......
+            I....I
+            I....I
+            I....I`
+        );
+        expect(score.score).to.equal(40);
     });
 
 });
