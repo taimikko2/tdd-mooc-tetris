@@ -29,11 +29,8 @@ describe("Randomness", () => {
     });
 
     it("Produces 2 different shapes of Tetraminos", () => {
-        //board.notify(0);
-        //board.notifyLines(2);
-        // board.moveDown();
-        expect(score.score).to.equal(0);
-        expect(distinctOrientations(shape).size).to.equal(2);
+        // how to fill it with 2 types of Tetrominos only ?
+        expect(distinctShapes(10).size).to.equal(2);
     });
 
     // Several different shapes of Tetraminos
