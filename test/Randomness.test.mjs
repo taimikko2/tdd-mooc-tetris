@@ -1,8 +1,9 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
+import { RandomShapes } from "../src/RandomShapes.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
-let board;
+let randomShapes;
 function repeatAction(times, f) {
     for (let i = 0; i < times; i++) {
         f();
@@ -13,7 +14,7 @@ function distinctShapes(amount) {
     const distinct = new Set();
     let shape;
     for (let i = 0; i < amount; i++) {
-        shape = new RandomShapes.newShape();
+        shape = randomShapes.next();
         distinct.add(shape);
     }
     return distinct;
@@ -21,11 +22,9 @@ function distinctShapes(amount) {
 
 describe("Randomness", () => {
     beforeEach(() => {
-        //board = new Board(6, 6);
-        //score = new Scoring();
-        //board.attach(score);
-        //board.drop(Tetromino.I_SHAPE);
-        //board.tick();
+        randomShapes = new RandomShapes();
+        randomShapes.add(1,1);
+        randomShapes.add(2,2);
     });
 
     it("Produces 2 different shapes of Tetraminos", () => {
