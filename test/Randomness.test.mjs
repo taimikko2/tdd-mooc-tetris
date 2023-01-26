@@ -83,12 +83,12 @@ describe("Randomness", () => {
     expect(distinctShapes(sumOfAdded).size).to.equal(differentShapes);
   });
 
-  xit("Produces several different shapes of Tetraminos", () => {
+  it("Produces several different shapes of Tetraminos", () => {
     randomShapes = new RandomShapes();
-    randomShapes.add(Tetromino.I_SHAPE, 5);
-    randomShapes.add(Tetromino.T_SHAPE, 5);
-    expect(distinctShapes(10).size).to.equal(2);
-  });
+    let differentShapes = 7;
+    let sumOfAdded = addTetraminos(differentShapes);
+    expect(distinctShapes(2*sumOfAdded).size).to.equal(differentShapes);
+   });
 
   //
   // Distribution of shapes
