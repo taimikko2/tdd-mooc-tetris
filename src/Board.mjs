@@ -47,7 +47,7 @@ export class Board {
   }
   
   notifyLines(lines) {
-    console.log('Notifying observers... ('+lines+')');
+    //console.log('Notifying observers... ('+lines+')');
     for (const observer of this.observers) {
       observer.updateLines(lines);  
     }
