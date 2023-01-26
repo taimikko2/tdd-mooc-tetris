@@ -1,8 +1,8 @@
+import { Tetromino } from "./Tetromino.mjs";
 export class RandomShapes {
   data; // shapes
-  currentItem;
   currentPosition = -1;
-  
+
   constructor() {
     this.data = new Array(); // expect to get list of tetraminoes HERE
   }
@@ -12,24 +12,26 @@ export class RandomShapes {
       this.data.push(item);
     }
     this.currentPosition = this.data.length - 1;
+    //console.log("added randomShape "+this.data.length+" "+item);
   }
 
   next() {
+    let currentItem;
+    let pos = 0;
     if (this.currentPosition < 1) {
-        this.currentPosition = this.data.length - 1;
-        this.currentItem = this.data[0];
-      return this.currentItem;
+      this.currentPosition = this.data.length - 1; // to the last
+      currentItem = this.data[0];
+      return currentItem;
     }
-
-    let pos = Math.random(this.currentPosition); 
-    this.currentItem = this.data[pos];
+    pos = Math.floor(Math.random() * this.currentPosition);
+    currentItem = this.data[pos];
     this.data[pos] = this.data[this.currentPosition];
-    this.data[this.currentPosition] = this.currentItem;
-    this.currentPosition--;
-    return this.currentItem;
+    this.data[this.currentPosition] = currentItem;
+    this.currentPosition -= 1;
+    return currentItem;
   }
 
   toString() {
-    return this.shapes;
+    return this.data;
   }
 }
