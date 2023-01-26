@@ -1,4 +1,4 @@
-/*
+
 import { expect } from "chai";
 import { Tetromino } from "../src/Tetromino.mjs";
 
@@ -150,4 +150,3 @@ describe("The O shape", () => {
     expect(distinctOrientations(shape).size).to.equal(1);
   });
 });
-*/

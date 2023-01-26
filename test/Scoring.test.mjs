@@ -42,6 +42,7 @@ describe("Scoring", () => {
         board.rotateLeft();
         leftRepeat(5);
         tickRepeat(5);
+        //toista(5, board.tick);
         board.drop(Tetromino.I_SHAPE);
         board.rotateRight();
         board.moveRight();

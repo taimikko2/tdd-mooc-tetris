@@ -15,7 +15,7 @@ export class Scoring {
     }
 
     updateLines(lines) {
-        console.log("updateLines(" + lines + ").");
+        //console.log("updateLines(" + lines + ").");
         switch (lines) {
             case 1:
                 this.score += 40 * (this.level + 1);
