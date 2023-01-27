@@ -40,9 +40,9 @@ describe("Scoring", () => {
 
     it("clean one line", () => {
         board.rotateLeft();
-        leftRepeat(5);
-        tickRepeat(5);
-        //toista(5, board.tick);
+        //leftRepeat(5);
+        toista(5, () => board.moveLeft()); // works
+        toista(5, () => board.tick()); // works
         board.drop(Tetromino.I_SHAPE);
         board.rotateRight();
         board.moveRight();
